@@ -31,8 +31,6 @@ jobs:
         -Pjacoco
         -Pmutation-testing
         sonar:sonar 
-        -Dsonar.projectKey=NicGalli_car-racing-organization
-        -Dsonar.host.url=https://sonarcloud.io
     - name: Coveralls
       uses: coverallsapp/github-action@v2
       env:
