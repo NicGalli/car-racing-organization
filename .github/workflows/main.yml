@@ -20,7 +20,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/.m2
-        key: m2-${{hashFiles('**/pom.xml', '**/*.yaml')}}
+        key: m2-${{hashFiles('**/pom.xml', '**/*.yml')}}
         restore-keys: m2-
     - name: Build with Maven
       run: >
