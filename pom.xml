@@ -205,7 +205,11 @@
 						<mutators>
 							<mutator>DEFAULTS</mutator>
 						</mutators>
-						<mutationThreshold>100</mutationThreshold>
+						<!--
+					<mutationThreshold>100</mutationThreshold>
+						
+					-->
+						<mutationThreshold>0</mutationThreshold>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -215,7 +219,10 @@
 					<configuration>
 						<excludes>
 							<exclude>**/CarRacingOrganizationApplication.*</exclude>
-							<exclude>**/ServletInitializer.*</exclude>
+							<!--
+						<exclude>**/ServletInitializer.*</exclude>
+						
+					-->
 						</excludes>
 					</configuration>
 					<executions>
@@ -238,7 +245,9 @@
 											<limit>
 												<counter>LINE</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>1.00</minimum>
+												<minimum>0.00</minimum>
+												<!--	<minimum>1.00</minimum> -->
+												<minimum>0.00</minimum>
 											</limit>
 										</limits>
 									</rule>

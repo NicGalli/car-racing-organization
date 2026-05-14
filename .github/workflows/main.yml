@@ -27,5 +27,6 @@ jobs:
         xvfb-run
         mvn verify 
         -Pjacoco
+        -Pmutation-testing
     - name: Coveralls
       uses: coverallsapp/github-action@v2
