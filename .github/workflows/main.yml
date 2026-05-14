@@ -19,18 +19,21 @@ jobs:
     - name: Cache m2 folder
       uses: actions/cache@v5
       with:
-        path: ~/.m2
+        path: |
+          ~/.m2
+          ~/.sonar/cache
         key: m2-${{ hashFiles('**/pom.xml', '**/*.yml') }}
         restore-keys: m2-
     - name: Build with Maven
       run: >
         xvfb-run
-        mvn verify 
+        mvn verify
         -Pjacoco
         -Pmutation-testing
+        sonar:sonar 
+        -Dsonar.projectKey=NicGalli_car-racing-organization
+        -Dsonar.host.url=https://sonarcloud.io
     - name: Coveralls
       uses: coverallsapp/github-action@v2
-    - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v8
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
