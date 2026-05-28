@@ -234,6 +234,7 @@
 					<configuration>
 						<excludes>
 							<exclude>**/CarRacingOrganizationApplication.*</exclude>
+							<exclude>com/galli/project/model/*</exclude>
 							<!--
 						<exclude>**/ServletInitializer.*</exclude>
 						
