@@ -222,6 +222,10 @@
 						</dependency>
 					</dependencies>
 					<configuration>
+						<targetClasses>
+							<param>com.galli.project.service.*</param>
+							<param>com.galli.project.repository.*</param>
+						</targetClasses>
 						<!-- pit not working yet -->
 						<mutators>
 							<mutator>DEFAULTS</mutator>
