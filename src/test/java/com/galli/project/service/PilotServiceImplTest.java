@@ -4,6 +4,8 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +34,14 @@ class PilotServiceImplTest {
 		Pilot pilot2 = new Pilot(2L, "second");
 		when(pilotRepository.findAll()).thenReturn(asList(pilot1, pilot2));
 		assertThat(pilotService.getAllPilots()).containsExactly(pilot1, pilot2);
+	}
+
+	@Test
+	@DisplayName("Test getPilotById")
+	void test2() {
+		Pilot pilot = new Pilot(1L, "pilot name");
+		when(pilotRepository.findById(1L)).thenReturn(Optional.of(pilot));
+		assertThat(pilotService.getPilotById(1)).isEqualTo(pilot);
 	}
 
 }

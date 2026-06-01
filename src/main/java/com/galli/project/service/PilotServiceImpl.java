@@ -21,8 +21,7 @@ public class PilotServiceImpl implements PilotService {
 
 	@Override
 	public Pilot getPilotById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findById(id).get();
 	}
 
 	@Override
