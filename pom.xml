@@ -224,17 +224,15 @@
 					<configuration>
 						<targetClasses>
 							<param>com.galli.project.service.*</param>
-							<param>com.galli.project.repository.*</param>
 						</targetClasses>
-						<!-- pit not working yet -->
+						<targetTests>
+							<param>com.galli.project.service.*</param>
+						</targetTests>
 						<mutators>
 							<mutator>DEFAULTS</mutator>
+							<mutator>NON_VOID_METHOD_CALLS</mutator>
 						</mutators>
-						<!--
-					<mutationThreshold>100</mutationThreshold>
-						
-					-->
-						<mutationThreshold>0</mutationThreshold>
+						<mutationThreshold>100</mutationThreshold>
 					</configuration>
 					<executions>
 						<execution>
@@ -250,19 +248,21 @@
 					<artifactId>jacoco-maven-plugin</artifactId>
 					<version>0.8.14</version>
 					<configuration>
-						<excludes>
-							<exclude>**/CarRacingOrganizationApplication.*</exclude>
-							<exclude>com/galli/project/model/*</exclude>
-							<!--
-						<exclude>**/ServletInitializer.*</exclude>
-						
-					-->
-						</excludes>
+						<includes>
+							<include>com/galli/project/service/*</include>
+						</includes>
 					</configuration>
 					<executions>
 						<execution>
+							<id>pre-unit-tests</id>
 							<goals>
 								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>post-unit-test</id>
+							<phase>test</phase>
+							<goals>
 								<goal>report</goal>
 							</goals>
 						</execution>
@@ -279,9 +279,7 @@
 											<limit>
 												<counter>LINE</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>0.00</minimum>
-												<!--	<minimum>1.00</minimum> -->
-												<minimum>0.00</minimum>
+												<minimum>1.00</minimum>
 											</limit>
 										</limits>
 									</rule>
