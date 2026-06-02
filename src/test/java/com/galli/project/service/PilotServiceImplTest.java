@@ -72,4 +72,19 @@ class PilotServiceImplTest {
 		inOrder.verify(pilotRepository).save(toSave);
 	}
 
+	@Test
+	@DisplayName("Test updatePilotById")
+	void test5() {
+		Pilot replacement = spy(new Pilot(null, "pilot name"));
+		Pilot updated = new Pilot(1L, "updated name");
+
+		when(pilotRepository.save(any(Pilot.class))).thenReturn(updated);
+
+		Pilot result = pilotService.updatePilotById(1L, replacement);
+		assertThat(result).isSameAs(updated);
+
+		InOrder inOrder = inOrder(replacement, pilotRepository);
+		inOrder.verify(replacement).setId(1L);
+		inOrder.verify(pilotRepository).save(replacement);
+	}
 }

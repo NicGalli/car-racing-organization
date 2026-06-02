@@ -32,8 +32,8 @@ public class PilotServiceImpl implements PilotService {
 
 	@Override
 	public Pilot updatePilotById(long id, Pilot replacement) {
-		// TODO Auto-generated method stub
-		return null;
+		replacement.setId(id);
+		return repository.save(replacement);
 	}
 
 }
