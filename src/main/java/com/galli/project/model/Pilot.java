@@ -27,6 +27,10 @@ public class Pilot {
 		this.name = name;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Pilot [id=" + id + ", name=" + name + "]";

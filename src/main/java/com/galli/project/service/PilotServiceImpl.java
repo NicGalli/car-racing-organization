@@ -26,8 +26,8 @@ public class PilotServiceImpl implements PilotService {
 
 	@Override
 	public Pilot insertNewPilot(Pilot pilot) {
-		// TODO Auto-generated method stub
-		return null;
+		pilot.setId(null);
+		return repository.save(pilot);
 	}
 
 	@Override
