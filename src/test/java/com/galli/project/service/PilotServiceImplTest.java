@@ -2,6 +2,7 @@ package com.galli.project.service;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -37,11 +38,18 @@ class PilotServiceImplTest {
 	}
 
 	@Test
-	@DisplayName("Test getPilotById")
+	@DisplayName("Test getPilotById if pilot is found")
 	void test2() {
 		Pilot pilot = new Pilot(1L, "pilot name");
 		when(pilotRepository.findById(1L)).thenReturn(Optional.of(pilot));
 		assertThat(pilotService.getPilotById(1)).isEqualTo(pilot);
+	}
+
+	@Test
+	@DisplayName("Test getPilotById if pilot is not found")
+	void test3() {
+		when(pilotRepository.findById(anyLong())).thenReturn(Optional.empty());
+		assertThat(pilotService.getPilotById(1)).isNull();
 	}
 
 }
