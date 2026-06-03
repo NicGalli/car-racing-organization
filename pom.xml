@@ -34,6 +34,13 @@
 		<sonar.organization>nicgalli</sonar.organization>
 		<sonar.projectKey>NicGalli_car-racing-organization</sonar.projectKey>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+		<sonar.coverage.exclusions>
+			com/galli/project/model/**,
+			com/galli/project/repository/**,
+			**/CarRacingOrganizationApplication.*,
+			**/ServletInitializer.*
+		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
