@@ -32,9 +32,12 @@ jobs:
         mvn verify
         -Pjacoco
         -Pmutation-testing
-        sonar:sonar 
+    - name: Sonar
+      if: always()
+      run: mvn sonar:sonar
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Coveralls
+      if: always()
       #full hash requested by sonar for security githubactions:S7637
       uses: coverallsapp/github-action@0a51d2e0b5417d06e4ecceb534aec87defc53926

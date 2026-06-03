@@ -18,6 +18,19 @@ public class Pilot {
 		this.name = name;
 	}
 
+	/**For testing only
+	 * @param id
+	 * @param name
+	 */
+	public Pilot(Long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Pilot [id=" + id + ", name=" + name + "]";
