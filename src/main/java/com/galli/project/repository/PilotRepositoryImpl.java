@@ -29,8 +29,4 @@ public class PilotRepositoryImpl implements PilotRepository {
 	public Pilot save(Pilot pilot) {
 		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
 	}
-	public void hello() {
-		System.out.println();
-	}
-
 }
