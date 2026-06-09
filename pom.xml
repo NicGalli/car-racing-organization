@@ -41,6 +41,8 @@
 			**/CarRacingOrganizationApplication.*,
 			**/ServletInitializer.*
 		</sonar.coverage.exclusions>
+		
+		<argLine/>
 	</properties>
 	<dependencies>
 		<dependency>
