@@ -18,7 +18,9 @@ public class Pilot {
 		this.name = name;
 	}
 
-	/**For testing only
+	/**
+	 * For testing only
+	 * 
 	 * @param id
 	 * @param name
 	 */
@@ -26,6 +28,8 @@ public class Pilot {
 		this.id = id;
 		this.name = name;
 	}
+
+	public Pilot() {}
 
 	public void setId(Long id) {
 		this.id = id;
