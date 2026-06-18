@@ -3,8 +3,12 @@ package com.galli.project.controller;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -22,6 +26,7 @@ import org.springframework.test.web.ModelAndViewAssert;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.galli.project.model.Pilot;
+import com.galli.project.model.PilotDTO;
 import com.galli.project.service.PilotService;
 
 @ExtendWith(SpringExtension.class)
@@ -32,6 +37,8 @@ class PilotWebControllerTest {
 	private MockMvc mvc;
 	@MockitoBean
 	private PilotService pilotService;
+	@Autowired
+	private PilotWebController controller;
 
 	@Test
 	@DisplayName("Test pilots page has status 2xx")
@@ -89,4 +96,40 @@ class PilotWebControllerTest {
 						"No Pilot found with id 1"));
 	}
 
+	@Test
+	@DisplayName("Edit new pilot")
+	void test7() throws Exception {
+		mvc.perform(get("/pilots/new")).andExpect(view().name("edit-pilot"))
+				.andExpect(model().attribute("pilot", new Pilot()))
+				.andExpect(model().attribute("message", ""));
+		verifyNoInteractions(pilotService);
+	}
+
+	@Test
+	@DisplayName("Post pilot without id should insert new pilot")
+	void test8() throws Exception {
+		mvc.perform(post("/pilots/save").param("name", "test name"))
+				.andExpect(view().name("redirect:/pilots"));
+		verify(pilotService)
+				.insertNewPilot(new Pilot(null, "test name"));
+	}
+
+	@Test
+	@DisplayName("Post pilot with id should update existing pilot")
+	void test9() throws Exception {
+		mvc.perform(post("/pilots/save").param("id", "1").param("name",
+				"test name"))
+				.andExpect(view().name("redirect:/pilots"));
+		verify(pilotService).updatePilotById(1L,
+				new Pilot(1L, "test name"));
+	}
+
+	@Test
+	@DisplayName("Test that a DTO is used when saving an employee")
+	void test10() {
+		PilotDTO pilotDTO = spy(new PilotDTO(1L, "test name"));
+		controller.savePilot(pilotDTO);
+		verify(pilotDTO).getId();
+		verify(pilotDTO).getName();
+	}
 }
