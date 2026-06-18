@@ -2,6 +2,7 @@ package com.galli.project.controller;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -67,4 +68,25 @@ class PilotWebControllerTest {
 				.andExpect(model().attribute("pilots", emptyList()))
 				.andExpect(model().attribute("message", "No Pilots"));
 	}
+
+	@Test
+	@DisplayName("Edit pilot when it is found")
+	void test5() throws Exception {
+		Pilot pilot = new Pilot(1L, "test");
+		when(pilotService.getPilotById(1L)).thenReturn(pilot);
+		mvc.perform(get("/pilots/edit/1")).andExpect(view().name("edit-pilot"))
+				.andExpect(model().attribute("pilot", pilot))
+				.andExpect(model().attribute("message", ""));
+	}
+
+	@Test
+	@DisplayName("Edit pilot when it is not found")
+	void test6() throws Exception {
+		when(pilotService.getPilotById(1L)).thenReturn(null);
+		mvc.perform(get("/pilots/edit/1")).andExpect(view().name("edit-pilot"))
+				.andExpect(model().attribute("pilot", nullValue()))
+				.andExpect(model().attribute("message",
+						"No Pilot found with id 1"));
+	}
+
 }
