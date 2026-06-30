@@ -7,7 +7,29 @@
 </head>
 
 <body>
-	No Pilots
+	<!--IF NO PILOT-->
+	<div th:if="${pilots.empty}">
+		<div>No Pilots</div>
+	</div>
+	<!--ELSE-->
+	<div th:unless="${pilots.empty}">
+		<table id="pilots_table">
+			<caption>Pilots</caption>
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="pilot : ${pilots}">
+					<td th:text="${pilot.id}"></td>
+					<td th:text="${pilot.name}"></td>
+					<td><a th:href="@{'/pilots/edit/' + ${pilot.id}}">Edit</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 
 </html>
