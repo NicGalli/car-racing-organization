@@ -61,4 +61,12 @@ class PilotWebControllerHtmlUnitTest {
 		page.getAnchorByHref("/pilots/edit/2");
 	}
 
+	@Test
+	@DisplayName("Test edit non existing pilot")
+	void test4() throws Exception {
+		when(service.getPilotById(1L)).thenReturn(null);
+		HtmlPage page = webClient.getPage("/pilots/edit/1");
+		assertThat(page.getBody().getTextContent())
+				.contains("No Pilot found with id 1");
+	}
 }
