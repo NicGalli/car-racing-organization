@@ -38,4 +38,10 @@ public class PilotServiceImpl implements PilotService {
 		return repository.save(replacement);
 	}
 
+	@Override
+	public void deletePilotById(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

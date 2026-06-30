@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,18 +49,24 @@ public class PilotWebController {
 
 	@PostMapping("/pilots/save")
 	public String savePilot(PilotDTO pilotDTO) {
-		
+
 		Pilot pilot = new Pilot();
 		pilot.setId(pilotDTO.getId());
 		pilot.setName(pilotDTO.getName());
-		
+
 		Long id = pilot.getId();
-		
+
 		if (id == null) {
 			service.insertNewPilot(pilot);
 		} else {
 			service.updatePilotById(id, pilot);
 		}
+		return "redirect:/pilots";
+	}
+
+	@DeleteMapping("/pilots/delete/{id}")
+	public String deletePilot(@PathVariable Long id) {
+		service.deletePilotById(id);
 		return "redirect:/pilots";
 	}
 }

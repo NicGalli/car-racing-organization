@@ -7,6 +7,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -131,5 +132,13 @@ class PilotWebControllerTest {
 		controller.savePilot(pilotDTO);
 		verify(pilotDTO).getId();
 		verify(pilotDTO).getName();
+	}
+
+	@Test
+	@DisplayName("Test delete")
+	void test11() throws Exception {
+		mvc.perform(delete("/pilots/delete/1"))
+				.andExpect(view().name("redirect:/pilots"));
+		verify(pilotService).deletePilotById(1L);
 	}
 }

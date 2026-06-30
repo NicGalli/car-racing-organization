@@ -13,4 +13,6 @@ public interface PilotService {
 	public Pilot insertNewPilot(Pilot pilot);
 
 	public Pilot updatePilotById(long id, Pilot replacement);
+
+	public void deletePilotById(long id);
 }

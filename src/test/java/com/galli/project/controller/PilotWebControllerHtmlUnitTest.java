@@ -104,7 +104,7 @@ class PilotWebControllerHtmlUnitTest {
 	}
 
 	@Test
-	@DisplayName("testHomePageShouldProvideALinkForCreatingANewEmployee")
+	@DisplayName("Test pilots page should provide a link for creating a new pilot")
 	void test7() throws Exception {
 		HtmlPage page = webClient.getPage("/pilots");
 		assertThat(page.getAnchorByText("New Pilot").getHrefAttribute())
