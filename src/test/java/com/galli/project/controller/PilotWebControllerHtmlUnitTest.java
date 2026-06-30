@@ -3,9 +3,11 @@ package com.galli.project.controller;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.htmlunit.WebClient;
+import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlTable;
 import org.junit.jupiter.api.DisplayName;
@@ -66,7 +68,46 @@ class PilotWebControllerHtmlUnitTest {
 	void test4() throws Exception {
 		when(service.getPilotById(1L)).thenReturn(null);
 		HtmlPage page = webClient.getPage("/pilots/edit/1");
+		assertThat(page.getTitleText()).isEqualTo("Pilots");
 		assertThat(page.getBody().getTextContent())
 				.contains("No Pilot found with id 1");
+	}
+
+	@Test
+	@DisplayName("Test edit existing employee")
+	void test5() throws Exception {
+		when(service.getPilotById(1L))
+				.thenReturn(new Pilot(1L, "original name"));
+		HtmlPage page = webClient.getPage("pilots/edit/1");
+
+		final HtmlForm form = page.getFormByName("pilot_form");
+		form.getInputByValue("original name")
+				.setValueAttribute("modified name");
+		form.getButtonByName("btn_submit").click();
+
+		verify(service).updatePilotById(1L,
+				new Pilot(1L, "modified name"));
+	}
+
+	@Test
+	@DisplayName("Test edit new Pilot")
+	void test6() throws Exception {
+		HtmlPage page = webClient.getPage("pilots/new");
+
+		final HtmlForm form = page.getFormByName("pilot_form");
+		form.getInputByName("name").setValueAttribute("new name");
+
+		form.getButtonByName("btn_submit").click();
+
+		verify(service)
+				.insertNewPilot(new Pilot(null, "new name"));
+	}
+
+	@Test
+	@DisplayName("testHomePageShouldProvideALinkForCreatingANewEmployee")
+	void test7() throws Exception {
+		HtmlPage page = webClient.getPage("/pilots");
+		assertThat(page.getAnchorByText("New Pilot").getHrefAttribute())
+				.isEqualTo("/pilots/new");
 	}
 }

@@ -7,6 +7,9 @@
 </head>
 
 <body>
+	<div>
+		<a th:href="@{/pilots/new}">New Pilot</a>
+	</div>
 	<!--IF NO PILOT-->
 	<div th:if="${pilots.empty}">
 		<div>No Pilots</div>
