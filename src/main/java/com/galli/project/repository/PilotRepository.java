@@ -1,15 +1,7 @@
 package com.galli.project.repository;
 
-import java.util.List;
-import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.galli.project.model.Pilot;
 
-public interface PilotRepository {
-
-	public List<Pilot> findAll();
-	
-	public Optional<Pilot> findById(long id);
-	
-	public Pilot save(Pilot pilot);
-}
+public interface PilotRepository extends JpaRepository<Pilot, Long> {}

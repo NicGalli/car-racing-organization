@@ -27,6 +27,11 @@ public class Pilot {
 		this.name = name;
 	}
 
+	/**
+	 * 
+	 */
+	public Pilot() {}
+
 	public void setId(Long id) {
 		this.id = id;
 	}

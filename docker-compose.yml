@@ -1,0 +1,11 @@
+services:
+  postgres_db:
+    container_name: postgres_db
+    image: postgres:18-alpine
+    ports:
+      - 5432:5432
+    environment:
+      #CHANGE IN PROD AND DON'T PUSH IT'
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
