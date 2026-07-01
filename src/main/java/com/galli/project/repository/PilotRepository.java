@@ -8,8 +8,10 @@ import com.galli.project.model.Pilot;
 public interface PilotRepository {
 
 	public List<Pilot> findAll();
-	
+
 	public Optional<Pilot> findById(long id);
-	
+
 	public Pilot save(Pilot pilot);
+
+	public void deleteById(long id);
 }

@@ -29,4 +29,9 @@ public class PilotRepositoryImpl implements PilotRepository {
 	public Pilot save(Pilot pilot) {
 		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
 	}
+
+	@Override
+	public void deleteById(long id) {
+		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
+	}
 }

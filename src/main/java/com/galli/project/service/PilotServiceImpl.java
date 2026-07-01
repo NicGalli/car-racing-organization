@@ -38,4 +38,8 @@ public class PilotServiceImpl implements PilotService {
 		return repository.save(replacement);
 	}
 
+	public void deletePilotById(long id) {
+		repository.deleteById(id);
+	}
+
 }

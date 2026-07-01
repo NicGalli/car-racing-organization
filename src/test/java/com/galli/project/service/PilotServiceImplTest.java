@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -86,5 +87,12 @@ class PilotServiceImplTest {
 		InOrder inOrder = inOrder(replacement, pilotRepository);
 		inOrder.verify(replacement).setId(1L);
 		inOrder.verify(pilotRepository).save(replacement);
+	}
+
+	@Test
+	@DisplayName("Test deletePilotById")
+	void test6() {
+		pilotService.deletePilotById(1L);
+		verify(pilotRepository).deleteById(1L);
 	}
 }
