@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.6</version>
+		<version>4.1.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.galli</groupId>
@@ -93,6 +93,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.htmlunit</groupId>
+			<artifactId>htmlunit</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -298,10 +303,12 @@
 						<targetClasses>
 							<param>com.galli.project.service.*</param>
 							<param>com.galli.project.repository.*</param>
+							<param>com.galli.project.controller.*</param>
 						</targetClasses>
 						<targetTests>
 							<param>com.galli.project.service.*</param>
 							<param>com.galli.project.repository.*</param>
+							<param>com.galli.project.controller.*</param>
 						</targetTests>
 						<mutators>
 							<mutator>DEFAULTS</mutator>
@@ -325,6 +332,7 @@
 						<includes>
 							<include>com/galli/project/service/*</include>
 							<include>com/galli/project/repository/*</include>
+							<include>com/galli/project/controller/*</include>
 						</includes>
 					</configuration>
 					<executions>
