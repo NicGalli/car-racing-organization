@@ -8,8 +8,8 @@ Feature: Pilots List Page
     And The list contains a few pilots
 
   Scenario: Add a Pilot
-    Given The user clicks the add pilot button
-    And The user is redirected to the add pilot page
+    Given The user clicks the new pilot button
+    And The user is redirected to the edit pilot page
     When The user fills the pilot form
     And The user clicks the confirm button
     Then The Pilots Page is shown
@@ -17,8 +17,8 @@ Feature: Pilots List Page
     And The list contains the new pilot
 
   Scenario: Update a Pilot
-    Given The user clicks the update pilot button
-    And The user is redirected to the update pilot page
+    Given The user clicks the edit pilot button
+    And The user is redirected to the edit pilot page
     When The user fills the pilot form
     And The user clicks the confirm button
     Then The Pilots Page is shown
@@ -26,7 +26,10 @@ Feature: Pilots List Page
 
   Scenario: Delete a Pilot
     Given The pilot is shown in the list
+    And The user clicks the edit pilot button
+    And The user is redirected to the edit pilot page
     When The user clicks the delete pilot button
-    Then The pilot is not shown in the list
+    Then The Pilots Page is shown
+    And The pilot is not shown in the list
     And The pilot is not present in the database
 	

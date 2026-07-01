@@ -30,18 +30,6 @@ public class PilotsPageSteps {
 		throw new io.cucumber.java.PendingException();
 	}
 
-	@Given("The user clicks the add pilot button")
-	public void the_user_clicks_the_add_pilot_button() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
-
-	@Given("The user is redirected to the add pilot page")
-	public void the_user_is_redirected_to_the_add_pilot_page() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
-	}
-
 	@When("The user fills the pilot form")
 	public void the_user_fills_the_pilot_form() {
 		// Write code here that turns the phrase above into concrete actions
@@ -80,18 +68,23 @@ public class PilotsPageSteps {
 		throw new io.cucumber.java.PendingException();
 	}
 
-	@Given("The user clicks the update pilot button")
-	public void theUserClicksTheUpdatePilotButton() {
-		throw new io.cucumber.java.PendingException();
-	}
-
-	@Given("The user is redirected to the update pilot page")
-	public void theUserIsRedirectedToTheUpdatePilotPage() {
-		throw new io.cucumber.java.PendingException();
-	}
-
 	@Then("The list contains a few pilots and the updated pilot")
 	public void theListContainsAFewPilotsAndTheUpdatedPilot() {
+		throw new io.cucumber.java.PendingException();
+	}
+
+	@Given("The user clicks the new pilot button")
+	public void theUserClicksTheNewPilotButton() {
+		throw new io.cucumber.java.PendingException();
+	}
+
+	@Given("The user is redirected to the edit pilot page")
+	public void theUserIsRedirectedToTheEditPilotPage() {
+		throw new io.cucumber.java.PendingException();
+	}
+
+	@Given("The user clicks the edit pilot button")
+	public void theUserClicksTheEditPilotButton() {
 		throw new io.cucumber.java.PendingException();
 	}
 }
