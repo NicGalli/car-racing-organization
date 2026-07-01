@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,7 +63,7 @@ public class PilotWebController {
 		return "redirect:/pilots";
 	}
 
-	@DeleteMapping("/pilots/delete/{id}")
+	@PostMapping("/pilots/delete/{id}")
 	public String deletePilot(@PathVariable Long id) {
 		service.deletePilotById(id);
 		return "redirect:/pilots";

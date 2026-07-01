@@ -56,9 +56,12 @@ class PilotWebControllerHtmlUnitTest {
 		assertThat(page.getBody().getTextContent())
 				.doesNotContain("No Pilots");
 		HtmlTable table = page.getHtmlElementById("pilots_table");
-		assertThat(table.asNormalizedText()).isEqualTo("Pilots\n"
-				+ "ID	Name\n" + "1	test1	Edit\n"
-				+ "2	test2	Edit");
+		String textBlock = """
+				Pilots
+				ID	Name
+				1	test1	Edit
+				2	test2	Edit""";
+		assertThat(table.asNormalizedText()).isEqualTo(textBlock);
 		page.getAnchorByHref("/pilots/edit/1");
 		page.getAnchorByHref("/pilots/edit/2");
 	}
@@ -109,5 +112,18 @@ class PilotWebControllerHtmlUnitTest {
 		HtmlPage page = webClient.getPage("/pilots");
 		assertThat(page.getAnchorByText("New Pilot").getHrefAttribute())
 				.isEqualTo("/pilots/new");
+	}
+
+	@Test
+	@DisplayName("Test deleting existing employee")
+	void test8() throws Exception {
+		when(service.getPilotById(1L))
+				.thenReturn(new Pilot(1L, "to be deleted"));
+		HtmlPage page = webClient.getPage("pilots/edit/1");
+
+		final HtmlForm form = page.getFormByName("pilot_form");
+		form.getButtonByName("btn_delete").click();
+
+		verify(service).deletePilotById(1L);
 	}
 }

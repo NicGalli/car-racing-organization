@@ -18,6 +18,11 @@
 				Name: <input type="text" th:field="*{name}" />
 			</p>
 			<button type="submit" name="btn_submit">Save</button>
+			<button type="submit" name="btn_delete" th:if="${pilot.id != null}" th:formaction="@{'/pilots/delete/' +
+				${pilot.id}}">
+				Delete
+			</button>
 		</form>
 	</div>
+
 </html>
