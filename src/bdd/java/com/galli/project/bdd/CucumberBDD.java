@@ -19,6 +19,7 @@ import org.junit.platform.suite.api.Suite;
  * 
  * docker compose down
  */
+
 @Suite
 @IncludeEngines("cucumber")
 @SelectPackages("features")
