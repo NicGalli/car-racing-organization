@@ -32,4 +32,3 @@ Feature: Pilots List Page
     Then The Pilots Page is shown
     And The pilot is not shown in the list
     And The pilot is not present in the database
-	
