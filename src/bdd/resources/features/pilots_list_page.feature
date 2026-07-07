@@ -13,8 +13,7 @@ Feature: Pilots List Page
     When The user fills the pilot form
     And The user clicks the confirm button
     Then The Pilots Page is shown
-    And The list contains a few pilots
-    And The list contains the new pilot
+    And The list contains a few pilots and the new pilot
 
   Scenario: Update a Pilot
     Given The user clicks the edit pilot button
@@ -25,8 +24,7 @@ Feature: Pilots List Page
     And The list contains a few pilots and the updated pilot
 
   Scenario: Delete a Pilot
-    Given The pilot is shown in the list
-    And The user clicks the edit pilot button
+    Given The user clicks the edit pilot button
     And The user is redirected to the edit pilot page
     When The user clicks the delete pilot button
     Then The Pilots Page is shown

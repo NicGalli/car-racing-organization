@@ -18,7 +18,7 @@ public class PilotServiceImpl implements PilotService {
 
 	@Override
 	public List<Pilot> getAllPilots() {
-		return repository.findAll();
+		return repository.findAllByOrderByIdAsc();
 	}
 
 	@Override
