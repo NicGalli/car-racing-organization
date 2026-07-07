@@ -38,7 +38,7 @@ class PilotServiceImplTest {
 	void test1() {
 		Pilot pilot1 = new Pilot(1L, "first");
 		Pilot pilot2 = new Pilot(2L, "second");
-		when(pilotRepository.findAll()).thenReturn(asList(pilot1, pilot2));
+		when(pilotRepository.findAllByOrderByIdAsc()).thenReturn(asList(pilot1, pilot2));
 		assertThat(pilotService.getAllPilots()).containsExactly(pilot1, pilot2);
 	}
 
