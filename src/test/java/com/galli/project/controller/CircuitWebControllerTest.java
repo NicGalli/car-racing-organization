@@ -129,7 +129,7 @@ class CircuitWebControllerTest {
 	}
 
 	@Test
-	@DisplayName("Test that a DTO is used when saving an employee")
+	@DisplayName("Test that a DTO is used when saving a circuit")
 	void test10() {
 		CircuitDTO circuitDTO = spy(new CircuitDTO(1L, "test name", 1000L));
 		controller.saveCircuit(circuitDTO);

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Circuits</title>
+</head>
+
+<body>
+	<div>
+		<a th:href="@{/circuits/new}">New Circuit</a>
+	</div>
+	<!--IF NO PILOT-->
+	<div th:if="${circuits.empty}">
+		<div>No Circuits</div>
+	</div>
+	<!--ELSE-->
+	<div th:unless="${circuits.empty}">
+		<table id="circuits_table">
+			<caption>Circuits</caption>
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Length (m)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="circuit : ${circuits}">
+					<td th:text="${circuit.id}"></td>
+					<td th:text="${circuit.name}"></td>
+					<td th:text="${circuit.length}"></td>
+					<td><a th:href="@{'/circuits/edit/' + ${circuit.id}}">Edit</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

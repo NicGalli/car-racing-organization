@@ -39,7 +39,7 @@ class PilotWebControllerHtmlUnitTest {
 	}
 
 	@Test
-	@DisplayName("Test Pilots page when there are no employees")
+	@DisplayName("Test Pilots page when there are no pilots")
 	void test2() throws Exception {
 		when(service.getAllPilots()).thenReturn(emptyList());
 		HtmlPage page = webClient.getPage("/pilots");
@@ -77,7 +77,7 @@ class PilotWebControllerHtmlUnitTest {
 	}
 
 	@Test
-	@DisplayName("Test edit existing employee")
+	@DisplayName("Test edit existing pilot")
 	void test5() throws Exception {
 		when(service.getPilotById(1L))
 				.thenReturn(new Pilot(1L, "original name"));
@@ -115,7 +115,7 @@ class PilotWebControllerHtmlUnitTest {
 	}
 
 	@Test
-	@DisplayName("Test deleting existing employee")
+	@DisplayName("Test deleting existing pilot")
 	void test8() throws Exception {
 		when(service.getPilotById(1L))
 				.thenReturn(new Pilot(1L, "to be deleted"));

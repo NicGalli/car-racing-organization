@@ -125,7 +125,7 @@ class PilotWebControllerTest {
 	}
 
 	@Test
-	@DisplayName("Test that a DTO is used when saving an employee")
+	@DisplayName("Test that a DTO is used when saving a pilot")
 	void test10() {
 		PilotDTO pilotDTO = spy(new PilotDTO(1L, "test name"));
 		controller.savePilot(pilotDTO);
