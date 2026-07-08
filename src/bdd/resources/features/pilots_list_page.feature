@@ -11,7 +11,7 @@ Feature: Pilots List Page
     Given The user clicks the new pilot button
     And The user is redirected to the edit pilot page
     When The user fills the pilot form
-    And The user clicks the confirm button
+    And The user clicks the confirm button of the edit pilot page
     Then The Pilots Page is shown
     And The list contains a few pilots and the new pilot
 
@@ -19,7 +19,7 @@ Feature: Pilots List Page
     Given The user clicks the edit pilot button
     And The user is redirected to the edit pilot page
     When The user fills the pilot form
-    And The user clicks the confirm button
+    And The user clicks the confirm button of the edit pilot page
     Then The Pilots Page is shown
     And The list contains a few pilots and the updated pilot
 
