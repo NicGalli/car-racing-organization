@@ -2,38 +2,45 @@ package com.galli.project.service;
 
 import java.util.List;
 
-import com.galli.project.model.Circuit;
+import org.springframework.stereotype.Service;
 
+import com.galli.project.model.Circuit;
+import com.galli.project.repository.CircuitRepository;
+
+@Service
 public class CircuitServiceImpl implements CircuitService {
+
+	private CircuitRepository repository;
+
+	public CircuitServiceImpl(CircuitRepository repository) {
+		this.repository = repository;
+	}
 
 	@Override
 	public List<Circuit> getAllCircuits() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAllByOrderByIdAsc();
 	}
 
 	@Override
 	public Circuit getCircuitById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findById(id).orElse(null);
 	}
 
 	@Override
 	public Circuit insertNewCircuit(Circuit circuit) {
-		// TODO Auto-generated method stub
-		return null;
+		circuit.setId(null);
+		return repository.save(circuit);
 	}
 
 	@Override
 	public Circuit updateCircuitById(long id, Circuit replacement) {
-		// TODO Auto-generated method stub
-		return null;
+		replacement.setId(id);
+		return repository.save(replacement);
 	}
 
 	@Override
 	public void deleteCircuitById(long id) {
-		// TODO Auto-generated method stub
-		
+		repository.deleteById(id);
 	}
 
 }
