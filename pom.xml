@@ -40,7 +40,7 @@
 			**/CarRacingOrganizationApplication.*,
 			**/ServletInitializer.*
 		</sonar.coverage.exclusions>
-		<argLine/>
+		<argLine />
 	</properties>
 	<dependencies>
 		<dependency>
