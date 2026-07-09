@@ -15,4 +15,5 @@ public interface CircuitService {
 	public Circuit updateCircuitById(long id, Circuit replacement);
 
 	public void deleteCircuitById(long id);
+
 }
