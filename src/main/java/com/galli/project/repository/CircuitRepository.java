@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.galli.project.model.Circuit;
 
 public interface CircuitRepository extends JpaRepository<Circuit, Long> {
+	public List<Circuit> findByName(String name);
+
 	public List<Circuit> findAllByOrderByIdAsc();
 
 }
