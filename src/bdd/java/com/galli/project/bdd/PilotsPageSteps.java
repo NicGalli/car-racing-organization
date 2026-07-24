@@ -92,8 +92,9 @@ public class PilotsPageSteps extends CucumberSpringConfig {
 		form.getInputByName("name").setValueAttribute("new pilot");
 	}
 
-	@When("The user clicks the confirm button")
-	public void the_user_clicks_the_confirm_button() throws IOException {
+	@When("The user clicks the confirm button of the edit pilot page")
+	public void the_user_clicks_the_confirm_button_of_the_edit_pilot_page()
+			throws IOException {
 		HtmlForm form = editPilotPage.getFormByName("pilot_form");
 		pilotListPage = form.getButtonByName("btn_submit").click();
 	}
