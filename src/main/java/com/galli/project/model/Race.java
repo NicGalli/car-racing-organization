@@ -1,7 +1,12 @@
 package com.galli.project.model;
 
+import static org.hibernate.annotations.OnDeleteAction.CASCADE;
+import static org.hibernate.annotations.OnDeleteAction.SET_NULL;
+
 import java.util.Objects;
 import java.util.Set;
+
+import org.hibernate.annotations.OnDelete;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,10 +24,43 @@ public class Race {
 	private String name;
 
 	@ManyToOne
+	@OnDelete(action = SET_NULL)
 	private Circuit circuit;
-	
+
 	@ManyToMany
+	@OnDelete(action = CASCADE)
 	private Set<Pilot> pilotsList;
+
+	/**
+	 * 
+	 */
+	public Race() {}
+
+	/**
+	 * @param name
+	 * @param circuit
+	 * @param pilotsList
+	 */
+	public Race(String name, Circuit circuit, Set<Pilot> pilotsList) {
+		this.name = name;
+		this.circuit = circuit;
+		this.pilotsList = pilotsList;
+	}
+
+	/**
+	 * For testing only
+	 * 
+	 * @param id
+	 * @param name
+	 * @param circuit
+	 * @param pilotsList
+	 */
+	public Race(Long id, String name, Circuit circuit, Set<Pilot> pilotsList) {
+		this.id = id;
+		this.name = name;
+		this.circuit = circuit;
+		this.pilotsList = pilotsList;
+	}
 
 	public Long getId() {
 		return id;
@@ -80,37 +118,6 @@ public class Race {
 	public String toString() {
 		return "Race [id=" + id + ", name=" + name + ", circuit=" + circuit
 				+ ", pilotsList=" + pilotsList + "]";
-	}
-
-	/**
-	 * 
-	 */
-	public Race() {}
-
-	/**
-	 * @param name
-	 * @param circuit
-	 * @param pilotsList
-	 */
-	public Race(String name, Circuit circuit, Set<Pilot> pilotsList) {
-		this.name = name;
-		this.circuit = circuit;
-		this.pilotsList = pilotsList;
-	}
-
-	/**
-	 * For testing only
-	 * 
-	 * @param id
-	 * @param name
-	 * @param circuit
-	 * @param pilotsList
-	 */
-	public Race(Long id, String name, Circuit circuit, Set<Pilot> pilotsList) {
-		this.id = id;
-		this.name = name;
-		this.circuit = circuit;
-		this.pilotsList = pilotsList;
 	}
 
 }
