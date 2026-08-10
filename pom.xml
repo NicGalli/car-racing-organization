@@ -37,6 +37,7 @@
 
 		<sonar.coverage.exclusions>
 			**/com/galli/project/model/*.*,
+			**/com/galli/project/repository/*.*,
 			**/CarRacingOrganizationApplication.*,
 			**/ServletInitializer.*
 		</sonar.coverage.exclusions>
@@ -321,12 +322,10 @@
 					<configuration>
 						<targetClasses>
 							<param>com.galli.project.service.*</param>
-							<param>com.galli.project.repository.*</param>
 							<param>com.galli.project.controller.*</param>
 						</targetClasses>
 						<targetTests>
 							<param>com.galli.project.service.*</param>
-							<param>com.galli.project.repository.*</param>
 							<param>com.galli.project.controller.*</param>
 						</targetTests>
 						<mutators>
@@ -350,7 +349,6 @@
 					<configuration>
 						<includes>
 							<include>com/galli/project/service/*</include>
-							<include>com/galli/project/repository/*</include>
 							<include>com/galli/project/controller/*</include>
 						</includes>
 					</configuration>
