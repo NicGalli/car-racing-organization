@@ -1,6 +1,5 @@
 package com.galli.project.model;
 
-import static org.hibernate.annotations.OnDeleteAction.CASCADE;
 import static org.hibernate.annotations.OnDeleteAction.SET_NULL;
 
 import java.util.Objects;
@@ -9,8 +8,11 @@ import java.util.Set;
 import org.hibernate.annotations.OnDelete;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
@@ -28,8 +30,15 @@ public class Race {
 	private Circuit circuit;
 
 	@ManyToMany
-	@OnDelete(action = CASCADE)
-	private Set<Pilot> pilotsList;
+	@JoinTable(
+			inverseJoinColumns = @JoinColumn(
+				name = "pilot_id",
+				foreignKey = @ForeignKey(
+					foreignKeyDefinition = "FOREIGN KEY (pilot_id) REFERENCES pilot(id) ON DELETE CASCADE"
+				)
+			)
+		)
+	private Set<Pilot> pilots;
 
 	/**
 	 * 
@@ -39,12 +48,12 @@ public class Race {
 	/**
 	 * @param name
 	 * @param circuit
-	 * @param pilotsList
+	 * @param pilots
 	 */
-	public Race(String name, Circuit circuit, Set<Pilot> pilotsList) {
+	public Race(String name, Circuit circuit, Set<Pilot> pilots) {
 		this.name = name;
 		this.circuit = circuit;
-		this.pilotsList = pilotsList;
+		this.pilots = pilots;
 	}
 
 	/**
@@ -53,13 +62,13 @@ public class Race {
 	 * @param id
 	 * @param name
 	 * @param circuit
-	 * @param pilotsList
+	 * @param pilots
 	 */
-	public Race(Long id, String name, Circuit circuit, Set<Pilot> pilotsList) {
+	public Race(Long id, String name, Circuit circuit, Set<Pilot> pilots) {
 		this.id = id;
 		this.name = name;
 		this.circuit = circuit;
-		this.pilotsList = pilotsList;
+		this.pilots = pilots;
 	}
 
 	public Long getId() {
@@ -86,17 +95,17 @@ public class Race {
 		this.circuit = circuit;
 	}
 
-	public Set<Pilot> getPilotsList() {
-		return pilotsList;
+	public Set<Pilot> getPilots() {
+		return pilots;
 	}
 
-	public void setPilotsList(Set<Pilot> pilotsList) {
-		this.pilotsList = pilotsList;
+	public void setPilots(Set<Pilot> pilots) {
+		this.pilots = pilots;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(circuit, id, name, pilotsList);
+		return Objects.hash(circuit, id, name, pilots);
 	}
 
 	@Override
@@ -111,13 +120,13 @@ public class Race {
 		return Objects.equals(circuit, other.circuit)
 				&& Objects.equals(id, other.id)
 				&& Objects.equals(name, other.name)
-				&& Objects.equals(pilotsList, other.pilotsList);
+				&& Objects.equals(pilots, other.pilots);
 	}
 
 	@Override
 	public String toString() {
 		return "Race [id=" + id + ", name=" + name + ", circuit=" + circuit
-				+ ", pilotsList=" + pilotsList + "]";
+				+ ", pilots=" + pilots + "]";
 	}
 
 }

@@ -41,6 +41,7 @@ class RaceJpaTest {
 		
 		Pilot pilot = new Pilot();
 		entityManager.persistAndFlush(pilot);
+		
 		Set<Pilot> pilots = new HashSet<>();
 		pilots.add(pilot);
 
@@ -51,6 +52,6 @@ class RaceJpaTest {
 		assertThat(saved.getId()).isNotNull();
 		assertThat(saved.getId()).isPositive();
 		assertThat(saved.getCircuit()).isEqualTo(circuit);
-		assertThat(saved.getPilotsList()).isEqualTo(pilots);
+		assertThat(saved.getPilots()).isEqualTo(pilots);
 	}
 }
