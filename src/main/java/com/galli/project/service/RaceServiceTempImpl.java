@@ -1,0 +1,20 @@
+package com.galli.project.service;
+
+import java.util.List;
+
+import com.galli.project.model.Race;
+
+public class RaceServiceTempImpl implements RaceService {
+	private static final String TEMPORARY_IMPLEMENTATION = "Temporary implementation";
+
+	@Override
+	public List<Race> getAllRaces() {
+		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
+	}
+
+	@Override
+	public Race getRaceById(long id) {
+		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
+	}
+
+}

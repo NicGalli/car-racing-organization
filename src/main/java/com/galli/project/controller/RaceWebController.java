@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.galli.project.model.Race;
 import com.galli.project.service.RaceService;
@@ -25,5 +26,14 @@ public class RaceWebController {
 		model.addAttribute("races", races);
 		model.addAttribute(MESSAGE, races.isEmpty() ? "No Races" : "");
 		return "races-list";
+	}
+
+	@GetMapping("/races/view/{id}")
+	public String editRacePage(Model model, @PathVariable Long id) {
+		Race race = service.getRaceById(id);
+		model.addAttribute("race", race);
+		model.addAttribute(MESSAGE,
+				race == null ? "No Race found with id " + id : "");
+		return "view-race";
 	}
 }

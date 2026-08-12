@@ -6,7 +6,8 @@ import com.galli.project.model.Race;
 
 public interface RaceService {
 
-	
 	public List<Race> getAllRaces();
+
+	public Race getRaceById(long id);
 
 }
