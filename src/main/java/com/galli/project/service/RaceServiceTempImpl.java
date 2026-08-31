@@ -2,8 +2,11 @@ package com.galli.project.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.galli.project.model.Race;
 
+@Service
 public class RaceServiceTempImpl implements RaceService {
 	private static final String TEMPORARY_IMPLEMENTATION = "Temporary implementation";
 
