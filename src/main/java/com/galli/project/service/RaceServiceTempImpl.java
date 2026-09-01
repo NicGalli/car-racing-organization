@@ -20,4 +20,19 @@ public class RaceServiceTempImpl implements RaceService {
 		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
 	}
 
+	@Override
+	public Race insertNewRace(Race race) {
+		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
+	}
+
+	@Override
+	public Race updateRaceById(Long id, Race race) {
+		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
+	}
+
+	@Override
+	public void deleteRaceById(long id) {
+		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
+	}
+
 }

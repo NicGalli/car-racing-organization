@@ -1,13 +1,16 @@
 package com.galli.project.controller;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.galli.project.model.Race;
+import com.galli.project.model.RaceDTO;
 import com.galli.project.service.RaceService;
 
 @Controller
@@ -29,11 +32,43 @@ public class RaceWebController {
 	}
 
 	@GetMapping("/races/view/{id}")
-	public String editRacePage(Model model, @PathVariable Long id) {
+	public String viewRacePage(Model model, @PathVariable Long id) {
 		Race race = service.getRaceById(id);
 		model.addAttribute("race", race);
 		model.addAttribute(MESSAGE,
 				race == null ? "No Race found with id " + id : "");
 		return "view-race";
+	}
+
+	@GetMapping("/races/new")
+	public String addRacePage(Model model) {
+		model.addAttribute("race", new Race());
+		model.addAttribute(MESSAGE, "");
+		return "view-race";
+	}
+
+	@PostMapping("/races/save")
+	public String saveRace(RaceDTO raceDTO) {
+		Race race = new Race();
+		race.setId(raceDTO.getId());
+		race.setName(raceDTO.getName());
+		race.setCircuit(raceDTO.getCircuit());
+		race.setPilotsList(new HashSet<>(raceDTO.getPilotsList()));
+
+		Long id = race.getId();
+
+		if (id == null) {
+			id = service.insertNewRace(race).getId();
+		} else {
+			id = service.updateRaceById(id, race).getId();
+		}
+
+		return "redirect:/races/view/" + id;
+	}
+
+	@PostMapping("/races/delete/{id}")
+	public String deleteRace(@PathVariable Long id) {
+		service.deleteRaceById(id);
+		return "redirect:/races";
 	}
 }

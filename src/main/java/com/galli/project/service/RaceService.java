@@ -10,4 +10,10 @@ public interface RaceService {
 
 	public Race getRaceById(long id);
 
+	public Race insertNewRace(Race race);
+
+	public Race updateRaceById(Long id, Race race);
+
+	public void deleteRaceById(long id);
+
 }
