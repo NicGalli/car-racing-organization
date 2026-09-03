@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.galli.project.model.Circuit;
+import com.galli.project.model.Pilot;
 import com.galli.project.model.Race;
 import com.galli.project.model.RaceDTO;
 import com.galli.project.service.RaceService;
@@ -34,7 +36,12 @@ public class RaceWebController {
 	@GetMapping("/races/view/{id}")
 	public String viewRacePage(Model model, @PathVariable Long id) {
 		Race race = service.getRaceById(id);
+		List<Circuit> allCircuits = service.getAllCircuits();
+		List<Pilot> allOtherPilots = service.getAllOtherPilots(id);
+
 		model.addAttribute("race", race);
+		model.addAttribute("allCircuits", allCircuits);
+		model.addAttribute("allOtherPilots", allOtherPilots);
 		model.addAttribute(MESSAGE,
 				race == null ? "No Race found with id " + id : "");
 		return "view-race";

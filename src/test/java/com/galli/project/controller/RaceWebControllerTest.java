@@ -94,9 +94,17 @@ class RaceWebControllerTest {
 		Set<Pilot> pilots = new HashSet<>(asList(pilot));
 
 		Race race = new Race(1L, "test", circuit, pilots);
+
+		List<Circuit> allCircuits = asList(circuit);
+		List<Pilot> allOtherPilots = asList(new Pilot(2L, "other pilot"));
+
 		when(raceService.getRaceById(1L)).thenReturn(race);
+		when(raceService.getAllCircuits()).thenReturn(allCircuits);
+		when(raceService.getAllOtherPilots(1L)).thenReturn(allOtherPilots);
 		mvc.perform(get("/races/view/1")).andExpect(view().name("view-race"))
 				.andExpect(model().attribute("race", race))
+				.andExpect(model().attribute("allCircuits", allCircuits))
+				.andExpect(model().attribute("allOtherPilots", allOtherPilots))
 				.andExpect(model().attribute("message", ""));
 	}
 

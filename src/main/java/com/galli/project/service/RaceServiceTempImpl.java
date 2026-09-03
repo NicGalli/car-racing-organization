@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.galli.project.model.Circuit;
+import com.galli.project.model.Pilot;
 import com.galli.project.model.Race;
 
 @Service
@@ -32,6 +34,16 @@ public class RaceServiceTempImpl implements RaceService {
 
 	@Override
 	public void deleteRaceById(long id) {
+		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
+	}
+
+	@Override
+	public List<Circuit> getAllCircuits() {
+		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
+	}
+
+	@Override
+	public List<Pilot> getAllOtherPilots(Long raceId) {
 		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
 	}
 

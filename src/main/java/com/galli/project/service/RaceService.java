@@ -2,6 +2,8 @@ package com.galli.project.service;
 
 import java.util.List;
 
+import com.galli.project.model.Circuit;
+import com.galli.project.model.Pilot;
 import com.galli.project.model.Race;
 
 public interface RaceService {
@@ -15,5 +17,9 @@ public interface RaceService {
 	public Race updateRaceById(Long id, Race race);
 
 	public void deleteRaceById(long id);
+
+	public List<Circuit> getAllCircuits();
+
+	public List<Pilot> getAllOtherPilots(Long raceId);
 
 }
