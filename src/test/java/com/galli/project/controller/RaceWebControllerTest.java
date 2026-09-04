@@ -7,7 +7,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -114,6 +113,8 @@ class RaceWebControllerTest {
 		when(raceService.getRaceById(1L)).thenReturn(null);
 		mvc.perform(get("/races/view/1")).andExpect(view().name("view-race"))
 				.andExpect(model().attribute("race", nullValue()))
+				.andExpect(model().attribute("allCircuits", emptyList()))
+				.andExpect(model().attribute("allOtherPilots", emptyList()))
 				.andExpect(model().attribute("message",
 						"No Race found with id 1"));
 	}
@@ -121,10 +122,13 @@ class RaceWebControllerTest {
 	@Test
 	@DisplayName("Edit new race")
 	void test7() throws Exception {
+		List<Circuit> allCircuits = asList(new Circuit(1L, "circuit", 1000L));
+		when(raceService.getAllCircuits()).thenReturn(allCircuits);
+
 		mvc.perform(get("/races/new")).andExpect(view().name("view-race"))
 				.andExpect(model().attribute("race", new Race()))
+				.andExpect(model().attribute("allCircuits", allCircuits))
 				.andExpect(model().attribute("message", ""));
-		verifyNoInteractions(raceService);
 	}
 
 	@Test

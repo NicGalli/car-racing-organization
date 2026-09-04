@@ -50,6 +50,7 @@ public class RaceWebController {
 	@GetMapping("/races/new")
 	public String addRacePage(Model model) {
 		model.addAttribute("race", new Race());
+		model.addAttribute("allCircuits", service.getAllCircuits());
 		model.addAttribute(MESSAGE, "");
 		return "view-race";
 	}
