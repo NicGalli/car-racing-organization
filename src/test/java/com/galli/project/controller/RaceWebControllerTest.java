@@ -196,4 +196,20 @@ class RaceWebControllerTest {
 				.andExpect(view().name("redirect:/races"));
 		verify(raceService).deleteRaceById(1L);
 	}
+
+	@Test
+	@DisplayName("Test add a pilot")
+	void test12() throws Exception {
+		mvc.perform(post("/races/1/pilots/add").param("pilotId", "3"))
+				.andExpect(view().name("redirect:/races/view/1"));
+		verify(raceService).addPilotToRaceById(1L, 3L);
+	}
+	
+	@Test
+	@DisplayName("Test delete a pilot")
+	void test13() throws Exception {
+		mvc.perform(post("/races/1/pilots/delete/3"))
+				.andExpect(view().name("redirect:/races/view/1"));
+		verify(raceService).deletePilotFromRaceById(1L, 3L);
+	}
 }

@@ -47,4 +47,15 @@ public class RaceServiceTempImpl implements RaceService {
 		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
 	}
 
+	@Override
+	public Race addPilotToRaceById(Long raceId, Long pilotId) {
+		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
+	}
+
+	@Override
+	public void deletePilotFromRaceById(Long raceId, Long pilotId) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

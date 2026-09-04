@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.galli.project.model.Circuit;
 import com.galli.project.model.Pilot;
@@ -80,5 +81,19 @@ public class RaceWebController {
 	public String deleteRace(@PathVariable Long id) {
 		service.deleteRaceById(id);
 		return "redirect:/races";
+	}
+
+	@PostMapping("/races/{raceId}/pilots/add")
+	public String addPilotToRace(@PathVariable Long raceId,
+			@RequestParam Long pilotId) {
+		service.addPilotToRaceById(raceId, pilotId);
+		return "redirect:/races/view/" + raceId;
+	}
+
+	@PostMapping("/races/{raceId}/pilots/delete/{pilotId}")
+	public String deletePilotFromRace(@PathVariable Long raceId,
+			@PathVariable Long pilotId) {
+		service.deletePilotFromRaceById(raceId, pilotId);
+		return "redirect:/races/view/" + raceId;
 	}
 }

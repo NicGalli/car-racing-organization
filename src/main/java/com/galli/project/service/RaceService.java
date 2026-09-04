@@ -22,4 +22,8 @@ public interface RaceService {
 
 	public List<Pilot> getAllOtherPilots(Long raceId);
 
+	public Race addPilotToRaceById(Long raceId, Long pilotId);
+
+	public void deletePilotFromRaceById(Long raceId, Long pilotId);
+
 }
