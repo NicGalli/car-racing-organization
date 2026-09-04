@@ -2,6 +2,7 @@ package com.galli.project.controller;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -138,19 +139,16 @@ class RaceWebControllerTest {
 				.thenReturn(new Race(1L, null, null, null));
 
 		Circuit circuit = new Circuit(1L, "circuit", 1000L);
-		Pilot pilot = new Pilot(1L, "pilot");
-		Set<Pilot> pilots = new HashSet<>(asList(pilot));
 
 		mvc.perform(post("/races/save")
 				.param("name", "test name")
 				.param("circuit.id", "1")
 				.param("circuit.name", "circuit")
-				.param("circuit.length", "1000")
-				.param("pilotsList[0].id", "1")
-				.param("pilotsList[0].name", "pilot"))
+				.param("circuit.length", "1000"))
 				.andExpect(view().name("redirect:/races/view/1"));
 		verify(raceService)
-				.insertNewRace(new Race(null, "test name", circuit, pilots));
+				.insertNewRace(
+						new Race(null, "test name", circuit, emptySet()));
 	}
 
 	@Test
