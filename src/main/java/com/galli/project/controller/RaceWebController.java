@@ -1,5 +1,7 @@
 package com.galli.project.controller;
 
+import static java.util.Collections.emptySet;
+
 import java.util.HashSet;
 import java.util.List;
 
@@ -50,7 +52,7 @@ public class RaceWebController {
 
 	@GetMapping("/races/new")
 	public String addRacePage(Model model) {
-		model.addAttribute("race", new Race());
+		model.addAttribute("race", new Race(null, null, emptySet()));
 		model.addAttribute("allCircuits", service.getAllCircuits());
 		model.addAttribute(MESSAGE, "");
 		return "view-race";

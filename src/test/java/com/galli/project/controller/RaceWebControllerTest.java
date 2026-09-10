@@ -127,7 +127,8 @@ class RaceWebControllerTest {
 		when(raceService.getAllCircuits()).thenReturn(allCircuits);
 
 		mvc.perform(get("/races/new")).andExpect(view().name("view-race"))
-				.andExpect(model().attribute("race", new Race()))
+				.andExpect(model().attribute("race",
+						new Race(null, new Circuit(), emptySet())))
 				.andExpect(model().attribute("allCircuits", allCircuits))
 				.andExpect(model().attribute("message", ""));
 	}
@@ -204,7 +205,7 @@ class RaceWebControllerTest {
 				.andExpect(view().name("redirect:/races/view/1"));
 		verify(raceService).addPilotToRaceById(1L, 3L);
 	}
-	
+
 	@Test
 	@DisplayName("Test delete a pilot")
 	void test13() throws Exception {
