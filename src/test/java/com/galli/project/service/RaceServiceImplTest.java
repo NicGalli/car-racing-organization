@@ -24,6 +24,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.galli.project.model.Circuit;
 import com.galli.project.model.Pilot;
 import com.galli.project.model.Race;
+import com.galli.project.repository.CircuitRepository;
 import com.galli.project.repository.RaceRepository;
 
 @ExtendWith(SpringExtension.class)
@@ -32,6 +33,9 @@ class RaceServiceImplTest {
 
 	@MockitoBean
 	private RaceRepository raceRepository;
+
+	@MockitoBean
+	private CircuitRepository circuitRepository;
 
 	@Autowired
 	private RaceServiceImpl raceService;
@@ -107,4 +111,14 @@ class RaceServiceImplTest {
 		verify(raceRepository).deleteById(1L);
 	}
 
+	@Test
+	@DisplayName("Test getAllCircuits")
+	void test7() {
+		when(circuitRepository.findAllByOrderByIdAsc())
+				.thenReturn(asList(new Circuit(1L, "first circuit", 1000L),
+						new Circuit(2L, "second circuit", 2000L)));
+		assertThat(raceService.getAllCircuits()).containsExactly(
+				new Circuit(1L, "first circuit", 1000L),
+				new Circuit(2L, "second circuit", 2000L));
+	}
 }

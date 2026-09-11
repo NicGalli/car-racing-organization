@@ -2,42 +2,52 @@ package com.galli.project.service;
 
 import java.util.List;
 
+import com.galli.project.model.Circuit;
 import com.galli.project.model.Race;
+import com.galli.project.repository.CircuitRepository;
 import com.galli.project.repository.RaceRepository;
 
 public class RaceServiceImpl implements RaceService {
 
-	private RaceRepository repository;
+	private RaceRepository raceRepository;
+	private CircuitRepository circuitRepository;
 
-	public RaceServiceImpl(RaceRepository repository) {
-		this.repository = repository;
+	public RaceServiceImpl(RaceRepository raceRepository,
+			CircuitRepository circuitRepository) {
+		this.raceRepository = raceRepository;
+		this.circuitRepository = circuitRepository;
 	}
 
 	@Override
 	public List<Race> getAllRaces() {
-		return repository.findAllByOrderByIdAsc();
+		return raceRepository.findAllByOrderByIdAsc();
 	}
 
 	@Override
 	public Race getRaceById(int id) {
-		return repository.findById(id).orElse(null);
+		return raceRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public Race insertNewRace(Race race) {
 		race.setId(null);
-		return repository.save(race);
+		return raceRepository.save(race);
 	}
 
 	@Override
 	public Race updateRaceById(long id, Race replacement) {
 		replacement.setId(id);
-		return repository.save(replacement);
+		return raceRepository.save(replacement);
 	}
 
 	@Override
 	public void deleteRaceById(long id) {
-		repository.deleteById(id);
+		raceRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Circuit> getAllCircuits() {
+		return circuitRepository.findAllByOrderByIdAsc();
 	}
 
 }
