@@ -25,6 +25,7 @@ import com.galli.project.model.Circuit;
 import com.galli.project.model.Pilot;
 import com.galli.project.model.Race;
 import com.galli.project.repository.CircuitRepository;
+import com.galli.project.repository.PilotRepository;
 import com.galli.project.repository.RaceRepository;
 
 @ExtendWith(SpringExtension.class)
@@ -33,9 +34,10 @@ class RaceServiceImplTest {
 
 	@MockitoBean
 	private RaceRepository raceRepository;
-
 	@MockitoBean
 	private CircuitRepository circuitRepository;
+	@MockitoBean
+	private PilotRepository pilotRepository;
 
 	@Autowired
 	private RaceServiceImpl raceService;
@@ -120,5 +122,63 @@ class RaceServiceImplTest {
 		assertThat(raceService.getAllCircuits()).containsExactly(
 				new Circuit(1L, "first circuit", 1000L),
 				new Circuit(2L, "second circuit", 2000L));
+	}
+
+	@Test
+	@DisplayName("Test getAllOtherPilots")
+	void test8() {
+		when(pilotRepository.findAllByOrderByIdAsc())
+				.thenReturn(asList(new Pilot(1L, "first pilot"),
+						new Pilot(2L, "second pilot"),
+						new Pilot(3L, "third pilot"),
+						new Pilot(4L, "fourth pilot")));
+		when(raceRepository.findById(1L)).thenReturn(
+				Optional.of(new Race(1L, "race name", null,
+						new HashSet<>(asList(new Pilot(1L, "first pilot"),
+								new Pilot(3L, "third pilot"))))));
+		assertThat(raceService
+				.getAllOtherPilots(1L))
+				.containsExactly(new Pilot(2L, "second pilot"),
+						new Pilot(4L, "fourth pilot"));
+	}
+
+	@Test
+	@DisplayName("Test addPilotToRaceById")
+	void test9() {
+		when(pilotRepository.findById(3L))
+				.thenReturn(
+						Optional.of(new Pilot(3L, "third pilot")));
+		when(raceRepository.findById(1L)).thenReturn(
+				Optional.of(new Race(1L, "race name", null,
+						new HashSet<>(asList(new Pilot(1L, "first pilot"),
+								new Pilot(2L, "second pilot"))))));
+		long pilotId = 3L;
+		long raceId = 1L;
+		raceService.addPilotToRaceById(raceId, pilotId);
+		verify(raceRepository).findById(raceId);
+		verify(pilotRepository).findById(pilotId);
+		verify(raceRepository).save(new Race(1L, "race name", null,
+				new HashSet<>(asList(new Pilot(1L, "first pilot"),
+						new Pilot(2L, "second pilot"),
+						new Pilot(3L, "third pilot")))));
+	}
+
+	@Test
+	@DisplayName("Test deletePilotFromRaceById")
+	void test10() {
+		when(pilotRepository.findById(2L))
+				.thenReturn(
+						Optional.of(new Pilot(2L, "second pilot")));
+		when(raceRepository.findById(1L)).thenReturn(
+				Optional.of(new Race(1L, "race name", null,
+						new HashSet<>(asList(new Pilot(1L, "first pilot"),
+								new Pilot(2L, "second pilot"))))));
+		long pilotId = 2L;
+		long raceId = 1L;
+		raceService.deletePilotFromRaceById(raceId, pilotId);
+		verify(raceRepository).findById(raceId);
+		verify(pilotRepository).findById(pilotId);
+		verify(raceRepository).save(new Race(1L, "race name", null,
+				new HashSet<>(asList(new Pilot(1L, "first pilot")))));
 	}
 }
