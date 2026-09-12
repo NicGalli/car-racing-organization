@@ -145,6 +145,13 @@ class RaceServiceImplTest {
 	@Test
 	@DisplayName("Test addPilotToRaceById")
 	void test9() {
+		Race toSave = new Race(1L, "race name", null,
+				new HashSet<>(asList(new Pilot(1L, "first pilot"),
+						new Pilot(2L, "second pilot"),
+						new Pilot(3L, "third pilot"))));
+		long pilotId = 3L;
+		long raceId = 1L;
+
 		when(pilotRepository.findById(3L))
 				.thenReturn(
 						Optional.of(new Pilot(3L, "third pilot")));
@@ -152,20 +159,24 @@ class RaceServiceImplTest {
 				Optional.of(new Race(1L, "race name", null,
 						new HashSet<>(asList(new Pilot(1L, "first pilot"),
 								new Pilot(2L, "second pilot"))))));
-		long pilotId = 3L;
-		long raceId = 1L;
-		raceService.addPilotToRaceById(raceId, pilotId);
+		when(raceRepository.save(toSave)).thenReturn(toSave);
+
+		assertThat(raceService.addPilotToRaceById(raceId, pilotId))
+				.isEqualTo(toSave);
+
 		verify(raceRepository).findById(raceId);
 		verify(pilotRepository).findById(pilotId);
-		verify(raceRepository).save(new Race(1L, "race name", null,
-				new HashSet<>(asList(new Pilot(1L, "first pilot"),
-						new Pilot(2L, "second pilot"),
-						new Pilot(3L, "third pilot")))));
+		verify(raceRepository).save(toSave);
 	}
 
 	@Test
 	@DisplayName("Test deletePilotFromRaceById")
 	void test10() {
+		long pilotId = 2L;
+		long raceId = 1L;
+		Race toSave = new Race(1L, "race name", null,
+				new HashSet<>(asList(new Pilot(1L, "first pilot"))));
+		
 		when(pilotRepository.findById(2L))
 				.thenReturn(
 						Optional.of(new Pilot(2L, "second pilot")));
@@ -173,12 +184,13 @@ class RaceServiceImplTest {
 				Optional.of(new Race(1L, "race name", null,
 						new HashSet<>(asList(new Pilot(1L, "first pilot"),
 								new Pilot(2L, "second pilot"))))));
-		long pilotId = 2L;
-		long raceId = 1L;
-		raceService.deletePilotFromRaceById(raceId, pilotId);
+		when(raceRepository.save(toSave)).thenReturn(toSave);
+		
+		assertThat(raceService.deletePilotFromRaceById(raceId, pilotId))
+				.isEqualTo(toSave);
+		
 		verify(raceRepository).findById(raceId);
 		verify(pilotRepository).findById(pilotId);
-		verify(raceRepository).save(new Race(1L, "race name", null,
-				new HashSet<>(asList(new Pilot(1L, "first pilot")))));
+		verify(raceRepository).save(toSave);
 	}
 }
