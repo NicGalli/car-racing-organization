@@ -30,7 +30,7 @@ public class RaceServiceImpl implements RaceService {
 	}
 
 	@Override
-	public Race getRaceById(int id) {
+	public Race getRaceById(long id) {
 		return raceRepository.findById(id).orElse(null);
 	}
 
@@ -60,7 +60,7 @@ public class RaceServiceImpl implements RaceService {
 	public List<Pilot> getAllOtherPilots(long raceId) {
 		List<Pilot> racePilots = new ArrayList<>(
 				raceRepository.findById(raceId).get()
-						.getPilotsList());
+						.getPilots());
 		List<Pilot> otherPilots = new ArrayList<>(
 				pilotRepository.findAllByOrderByIdAsc());
 		otherPilots.removeAll(racePilots);
@@ -71,7 +71,7 @@ public class RaceServiceImpl implements RaceService {
 	public void addPilotToRaceById(long raceId, long pilotId) {
 		Race race = raceRepository.findById(raceId).get();
 		Pilot pilot = pilotRepository.findById(pilotId).get();
-		race.getPilotsList().add(pilot);
+		race.getPilots().add(pilot);
 		raceRepository.save(race);
 	}
 
@@ -79,7 +79,7 @@ public class RaceServiceImpl implements RaceService {
 	public void deletePilotFromRaceById(long raceId, long pilotId) {
 		Race race = raceRepository.findById(raceId).get();
 		Pilot pilot = pilotRepository.findById(pilotId).get();
-		race.getPilotsList().remove(pilot);
+		race.getPilots().remove(pilot);
 		raceRepository.save(race);
 	}
 

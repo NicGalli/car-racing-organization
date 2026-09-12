@@ -1,31 +1,13 @@
 package com.galli.project.repository;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.galli.project.model.Race;
 
-@Repository
-public class RaceRepository {
+public interface RaceRepository extends JpaRepository<Race, Long> {
+	public List<Race> findByName(String name);
 
-	private static final String TEMPORARY_IMPLEMENTATION = "Temporary implementation";
-
-	public List<Race> findAllByOrderByIdAsc() {
-		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
-	}
-
-	public Optional<Race> findById(long id) {
-		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
-	}
-
-	public Race save(Race race) {
-		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
-	}
-
-	public void deleteById(long id) {
-		throw new UnsupportedOperationException(TEMPORARY_IMPLEMENTATION);
-	}
-
+	public List<Race> findAllByOrderByIdAsc();
 }

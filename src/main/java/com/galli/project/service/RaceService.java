@@ -10,7 +10,7 @@ public interface RaceService {
 
 	public List<Race> getAllRaces();
 
-	public Race getRaceById(int id);
+	public Race getRaceById(long id);
 
 	public Race insertNewRace(Race race);
 
