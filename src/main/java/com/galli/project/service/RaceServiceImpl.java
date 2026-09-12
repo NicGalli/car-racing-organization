@@ -68,19 +68,19 @@ public class RaceServiceImpl implements RaceService {
 	}
 
 	@Override
-	public void addPilotToRaceById(long raceId, long pilotId) {
+	public Race addPilotToRaceById(long raceId, long pilotId) {
 		Race race = raceRepository.findById(raceId).get();
 		Pilot pilot = pilotRepository.findById(pilotId).get();
 		race.getPilots().add(pilot);
-		raceRepository.save(race);
+		return raceRepository.save(race);
 	}
 
 	@Override
-	public void deletePilotFromRaceById(long raceId, long pilotId) {
+	public Race deletePilotFromRaceById(long raceId, long pilotId) {
 		Race race = raceRepository.findById(raceId).get();
 		Pilot pilot = pilotRepository.findById(pilotId).get();
 		race.getPilots().remove(pilot);
-		raceRepository.save(race);
+		return raceRepository.save(race);
 	}
 
 }
