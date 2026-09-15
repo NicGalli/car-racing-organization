@@ -3,6 +3,8 @@ package com.galli.project.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.galli.project.model.Circuit;
 import com.galli.project.model.Pilot;
 import com.galli.project.model.Race;
@@ -10,6 +12,7 @@ import com.galli.project.repository.CircuitRepository;
 import com.galli.project.repository.PilotRepository;
 import com.galli.project.repository.RaceRepository;
 
+@Service
 public class RaceServiceImpl implements RaceService {
 
 	private RaceRepository raceRepository;
