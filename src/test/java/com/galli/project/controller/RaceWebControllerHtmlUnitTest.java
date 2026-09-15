@@ -263,7 +263,7 @@ class RaceWebControllerHtmlUnitTest {
 		when(service.getAllOtherPilots(any()))
 				.thenReturn(asList(new Pilot(3L, "third pilot"),
 						new Pilot(4L, "fourth pilot")));
-		
+
 		HtmlPage page = webClient.getPage("races/view/1");
 
 		final HtmlForm form = page.getFormByName("add_pilot_form");
@@ -285,7 +285,7 @@ class RaceWebControllerHtmlUnitTest {
 
 		when(service.getRaceById(1L))
 				.thenReturn(new Race(1L, "original name", circuit1, pilots));
-		
+
 		HtmlPage page = webClient.getPage("races/view/1");
 
 		final HtmlForm form = page.getFormByName("delete_race_form");

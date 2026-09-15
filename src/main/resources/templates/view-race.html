@@ -35,11 +35,11 @@
 				</tr>
 			</table>
 			<!--IF NO PILOT-->
-			<div th:if="${race.pilotsList.empty}">
+			<div th:if="${race.pilots.empty}">
 				<div>No Pilots</div>
 			</div>
 			<!--ELSE-->
-			<div th:unless="${race.pilotsList.empty}">
+			<div th:unless="${race.pilots.empty}">
 				<table id="pilots_table">
 					<caption>Pilots</caption>
 					<thead>
@@ -49,9 +49,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="p : ${race.pilotsList}">
+						<tr th:each="p : ${race.pilots}">
 							<td><span th:text="${p.id}"></span><input type="hidden"
-									th:field="*{pilotsList[__${pStat.index}__].id}"></td>
+									th:field="*{pilots[__${pStat.index}__].id}"></td>
 							<td th:text="${p.name}"></td>
 							<td><button type="submit" name="btn_remove_pilot" th:if="${p.id != null}"
 									th:formaction="@{'/races/' +${race.id}+'/pilots/delete/'+ ${p.id}}">Remove</button>

@@ -64,7 +64,7 @@ public class RaceWebController {
 		race.setId(raceDTO.getId());
 		race.setName(raceDTO.getName());
 		race.setCircuit(raceDTO.getCircuit());
-		List<Pilot> pilots = raceDTO.getPilotsList();
+		List<Pilot> pilots = raceDTO.getPilots();
 		race.setPilots(pilots == null ? new HashSet<>()
 				: new HashSet<>(pilots));
 

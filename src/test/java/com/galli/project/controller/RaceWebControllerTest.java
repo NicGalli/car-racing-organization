@@ -187,7 +187,7 @@ class RaceWebControllerTest {
 		verify(raceDTO).getId();
 		verify(raceDTO).getName();
 		verify(raceDTO).getCircuit();
-		verify(raceDTO).getPilotsList();
+		verify(raceDTO).getPilots();
 	}
 
 	@Test

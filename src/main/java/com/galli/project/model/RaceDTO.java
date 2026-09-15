@@ -10,14 +10,14 @@ public class RaceDTO {
 
 	private Circuit circuit;
 
-	private List<Pilot> pilotsList;
+	private List<Pilot> pilots;
 
 	public RaceDTO(Long id, String name, Circuit circuit,
-			List<Pilot> pilotsList) {
+			List<Pilot> pilots) {
 		this.id = id;
 		this.name = name;
 		this.circuit = circuit;
-		this.pilotsList = pilotsList;
+		this.pilots = pilots;
 	}
 
 	public Long getId() {
@@ -32,8 +32,8 @@ public class RaceDTO {
 		return circuit;
 	}
 
-	public List<Pilot> getPilotsList() {
-		return pilotsList;
+	public List<Pilot> getPilots() {
+		return pilots;
 	}
 
 }
