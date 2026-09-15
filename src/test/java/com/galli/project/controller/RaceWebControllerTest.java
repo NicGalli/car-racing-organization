@@ -166,8 +166,8 @@ class RaceWebControllerTest {
 						.param("circuit.id", "1")
 						.param("circuit.name", "circuit")
 						.param("circuit.length", "1000")
-						.param("pilotsList[0].id", "1")
-						.param("pilotsList[0].name", "pilot"))
+						.param("pilots[0].id", "1")
+						.param("pilots[0].name", "pilot"))
 				.andExpect(view().name("redirect:/races/view/1"));
 		verify(raceService).updateRaceById(1L,
 				new Race(1L, "test name", circuit, pilots));
