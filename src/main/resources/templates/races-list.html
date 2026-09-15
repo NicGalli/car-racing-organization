@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Races</title>
+</head>
+
+<body>
+	<div>
+		<a th:href="@{/races/new}">New Race</a>
+	</div>
+	<!--IF NO RACE-->
+	<div th:if="${races.empty}">
+		<div>No Races</div>
+	</div>
+	<!--ELSE-->
+	<div th:unless="${races.empty}">
+		<table id="races_table">
+			<caption>Races</caption>
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="race : ${races}">
+					<td th:text="${race.id}"></td>
+					<td th:text="${race.name}"></td>
+					<td><a th:href="@{'/races/view/' + ${race.id}}">View</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Race View</title>
+</head>
+
+<body>
+	<div th:unless="${message.empty}">
+		<span th:text="${message}"></span>
+	</div>
+	<div th:if="${message.empty}">
+		<form name="race_form" action="#" th:action="@{/races/save}" th:object="${race}" method="post">
+			<input type="hidden" th:field="*{id}" />
+			<table>
+				<tr>
+					<td>
+						<p>Race: <input type="text" th:field="*{name}" /></p>
+					</td>
+					<td>
+						<button type="submit" name="btn_edit_name">Edit</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="circuit">Circuit:</label>
+						<select id="circuit" th:field="*{circuit.id}">
+							<option value="" disabled selected>Select</option>
+							<option th:each="c : ${allCircuits}" th:value="${c.id}" th:text="${c.name}">
+							</option>
+						</select>
+						<button type="submit" name="btn_edit_circuit">Edit</button>
+					</td>
+				</tr>
+			</table>
+			<!--IF NO PILOT-->
+			<div th:if="${race.pilotsList.empty}">
+				<div>No Pilots</div>
+			</div>
+			<!--ELSE-->
+			<div th:unless="${race.pilotsList.empty}">
+				<table id="pilots_table">
+					<caption>Pilots</caption>
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Name</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p : ${race.pilotsList}">
+							<td><span th:text="${p.id}"></span><input type="hidden"
+									th:field="*{pilotsList[__${pStat.index}__].id}"></td>
+							<td th:text="${p.name}"></td>
+							<td><button type="submit" name="btn_remove_pilot" th:if="${p.id != null}"
+									th:formaction="@{'/races/' +${race.id}+'/pilots/delete/'+ ${p.id}}">Remove</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</form>
+
+		<form name="add_pilot_form" th:if="${race.id != null}" th:action="@{'/races/' + ${race.id} + '/pilots/add'}" method="post">
+			<select id="pilot" name="pilotId" required>
+				<option value="" disabled selected>Pilots</option>
+				<option th:each="p : ${allOtherPilots}" th:value="${p.id}" th:text="${p.name}">
+				</option>
+			</select>
+			<button type="submit" name="btn_add_pilot">Add</button>
+		</form>
+		<form name="delete_race_form" th:if="${race.id != null}" th:action="@{'/races/delete/' +
+									${race.id}}" method="post">
+			<button type="submit" name="btn_delete_race">
+				Delete Race
+			</button>
+		</form>
+	</div>
+</body>
+
+</html>
