@@ -25,12 +25,13 @@
 				<tr>
 					<td>
 						<label for="circuit">Circuit:</label>
-						<select id="circuit" th:field="*{circuit.id}">
-							<option value="" disabled selected>Select</option>
-							<option th:each="c : ${allCircuits}" th:value="${c.id}" th:text="${c.name}">
+						<select id="circuit" name="circuit.id">
+							<option value="" disabled th:selected="${race.circuit == null || race.circuit.id == null}">
+								Select</option>
+							<option th:each="c : ${allCircuits}" th:value="${c.id}" th:text="${c.name}"
+								th:selected="${race.circuit != null && race.circuit.id == c.id}">
 							</option>
-						</select>
-						<button type="submit" name="btn_edit_circuit">Edit</button>
+						</select> <button type="submit" name="btn_edit_circuit">Edit</button>
 					</td>
 				</tr>
 			</table>
@@ -62,7 +63,8 @@
 			</div>
 		</form>
 
-		<form name="add_pilot_form" th:if="${race.id != null}" th:action="@{'/races/' + ${race.id} + '/pilots/add'}" method="post">
+		<form name="add_pilot_form" th:if="${race.id != null}" th:action="@{'/races/' + ${race.id} + '/pilots/add'}"
+			method="post">
 			<select id="pilot" name="pilotId" required>
 				<option value="" disabled selected>Pilots</option>
 				<option th:each="p : ${allOtherPilots}" th:value="${p.id}" th:text="${p.name}">

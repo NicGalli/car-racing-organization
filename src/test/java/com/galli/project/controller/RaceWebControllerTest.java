@@ -128,7 +128,7 @@ class RaceWebControllerTest {
 
 		mvc.perform(get("/races/new")).andExpect(view().name("view-race"))
 				.andExpect(model().attribute("race",
-						new Race(null, new Circuit(), emptySet())))
+						new Race(null, null, emptySet())))
 				.andExpect(model().attribute("allCircuits", allCircuits))
 				.andExpect(model().attribute("message", ""));
 	}

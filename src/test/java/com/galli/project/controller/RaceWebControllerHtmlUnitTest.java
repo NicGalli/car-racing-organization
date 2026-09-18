@@ -317,8 +317,13 @@ class RaceWebControllerHtmlUnitTest {
 				.contains("No Pilots");
 		form.getInputByName("name")
 				.setValue("A name");
+		assertEquals(
+				form.getSelectByName("circuit.id").getSelectedOptions()
+						.getFirst().getText(),
+				"Select");
 		form.getSelectByName("circuit.id").getOptionByText("second circuit")
 				.setSelected(true);
+		
 		form.getButtonByName("btn_edit_name").click();
 
 		ArgumentCaptor<Race> raceCaptor = ArgumentCaptor.forClass(Race.class);
