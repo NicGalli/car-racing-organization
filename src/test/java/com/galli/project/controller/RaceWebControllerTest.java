@@ -139,13 +139,11 @@ class RaceWebControllerTest {
 		when(raceService.insertNewRace(any()))
 				.thenReturn(new Race(1L, null, null, null));
 
-		Circuit circuit = new Circuit(1L, "circuit", 1000L);
+		Circuit circuit = new Circuit(1L, null, null);
 
 		mvc.perform(post("/races/save")
 				.param("name", "test name")
-				.param("circuit.id", "1")
-				.param("circuit.name", "circuit")
-				.param("circuit.length", "1000"))
+				.param("circuit.id", "1"))
 				.andExpect(view().name("redirect:/races/view/1"));
 		verify(raceService)
 				.insertNewRace(
@@ -158,16 +156,13 @@ class RaceWebControllerTest {
 		when(raceService.updateRaceById(anyLong(), any()))
 				.thenReturn(new Race(1L, null, null, null));
 
-		Circuit circuit = new Circuit(1L, "circuit", 1000L);
-		Set<Pilot> pilots = new HashSet<>(asList(new Pilot(1L, "pilot")));
+		Circuit circuit = new Circuit(1L, null, null);
+		Set<Pilot> pilots = new HashSet<>(asList(new Pilot(1L, null)));
 
 		mvc.perform(
 				post("/races/save").param("id", "1").param("name", "test name")
 						.param("circuit.id", "1")
-						.param("circuit.name", "circuit")
-						.param("circuit.length", "1000")
-						.param("pilots[0].id", "1")
-						.param("pilots[0].name", "pilot"))
+						.param("pilots[0].id", "1"))
 				.andExpect(view().name("redirect:/races/view/1"));
 		verify(raceService).updateRaceById(1L,
 				new Race(1L, "test name", circuit, pilots));
