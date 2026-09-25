@@ -60,14 +60,14 @@ class RaceServiceImplTest {
 		Race race = new Race(1L, "Race name", new Circuit(),
 				new HashSet<Pilot>());
 		when(raceRepository.findById(1L)).thenReturn(Optional.of(race));
-		assertThat(raceService.getRaceById(1)).isEqualTo(race);
+		assertThat(raceService.getRaceById(1L)).isEqualTo(race);
 	}
 
 	@Test
 	@DisplayName("Test getRaceById if Race is not found")
 	void test3() {
 		when(raceRepository.findById(anyLong())).thenReturn(Optional.empty());
-		assertThat(raceService.getRaceById(1)).isNull();
+		assertThat(raceService.getRaceById(1L)).isNull();
 	}
 
 	@Test

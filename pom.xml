@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.1.0</version>
+		<version>4.1.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.galli</groupId>
@@ -320,13 +320,13 @@
 					</dependencies>
 					<configuration>
 						<targetClasses>
-							<param>com.galli.project.service.*</param>
 							<param>com.galli.project.repository.*</param>
+							<param>com.galli.project.service.*</param>
 							<param>com.galli.project.controller.*</param>
 						</targetClasses>
 						<targetTests>
-							<param>com.galli.project.service.*</param>
 							<param>com.galli.project.repository.*</param>
+							<param>com.galli.project.service.*</param>
 							<param>com.galli.project.controller.*</param>
 						</targetTests>
 						<mutators>
@@ -349,8 +349,8 @@
 					<version>0.8.14</version>
 					<configuration>
 						<includes>
-							<include>com/galli/project/service/*</include>
 							<include>com/galli/project/repository/*</include>
+							<include>com/galli/project/service/*</include>
 							<include>com/galli/project/controller/*</include>
 						</includes>
 					</configuration>

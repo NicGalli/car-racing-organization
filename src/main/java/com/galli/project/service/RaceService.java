@@ -10,19 +10,20 @@ public interface RaceService {
 
 	public List<Race> getAllRaces();
 
-	public Race getRaceById(long id);
+	public Race getRaceById(Long id);
 
 	public Race insertNewRace(Race race);
 
-	public Race updateRaceById(long id, Race replacement);
+	public Race updateRaceById(Long id, Race replacement);
 
-	public void deleteRaceById(long id);
+	public void deleteRaceById(Long id);
 
 	public List<Circuit> getAllCircuits();
 
-	public List<Pilot> getAllOtherPilots(long raceId);
+	public List<Pilot> getAllOtherPilots(Long raceId);
 
-	public Race addPilotToRaceById(long raceId, long pilotId);
+	public Race addPilotToRaceById(Long raceId, Long pilotId);
 
-	public Race deletePilotFromRaceById(long raceId, long pilotId);
+	public Race deletePilotFromRaceById(Long raceId, Long pilotId);
+
 }
