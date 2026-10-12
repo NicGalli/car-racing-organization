@@ -35,6 +35,15 @@ public class Pilot {
 
 	public Pilot() {}
 
+	/**
+	 * For testing only
+	 * 
+	 * @param id
+	 */
+	public Pilot(Long id) {
+		this.id = id;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}

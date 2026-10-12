@@ -91,4 +91,13 @@ public class Circuit {
 	 */
 	public Circuit() {}
 
+	/**
+	 * For testing only
+	 * 
+	 * @param id
+	 */
+	public Circuit(Long id) {
+		this.id = id;
+	}
+
 }
