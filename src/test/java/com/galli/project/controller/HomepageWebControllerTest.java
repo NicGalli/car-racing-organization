@@ -21,16 +21,9 @@ class HomepageWebControllerTest {
 
 	@Autowired
 	private MockMvc mvc;
-//	@MockitoBean
-//	private RaceService raceService;
-//	@Autowired
-//	private RaceWebController controller;
 
 	@Autowired
 	private WebClient webClient;
-//
-//	@MockitoBean
-//	private RaceService service;
 
 	@Test
 	@DisplayName("Test homepage has status 2xx")
