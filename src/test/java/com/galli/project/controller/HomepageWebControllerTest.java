@@ -47,7 +47,7 @@ class HomepageWebControllerTest {
 	}
 
 	@Test
-	@DisplayName("Test Races page with races should show them in a table")
+	@DisplayName("Test homepage links have correct name and url")
 	void test4() throws Exception {
 		HtmlPage page = webClient.getPage("/homepage");
 

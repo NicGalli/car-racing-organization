@@ -24,7 +24,7 @@ class HomepageIT {
 
 	@Test
 	@DisplayName("Test links in homepage lead to correct pages")
-	void test4() throws Exception {
+	void test1() throws Exception {
 		HtmlPage homepage = webClient.getPage("/homepage");
 
 		HtmlPage races = homepage.getAnchorByText("Races List").click();
