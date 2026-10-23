@@ -164,10 +164,9 @@ class RaceWebControllerHtmlUnitTest {
 		final HtmlForm form = page.getFormByName("race_form");
 		form.getInputByValue("original name")
 				.setValue("modified name");
-		assertEquals(
+		assertEquals("first circuit",
 				form.getSelectByName("circuit.id").getSelectedOptions()
-						.getFirst().getText(),
-				"first circuit");
+						.getFirst().getText());
 		form.getSelectByName("circuit.id").getOptionByText("second circuit")
 				.setSelected(true);
 		form.getButtonByName("btn_edit_name").click();
@@ -205,10 +204,9 @@ class RaceWebControllerHtmlUnitTest {
 		final HtmlForm form = page.getFormByName("race_form");
 		form.getInputByValue("original name")
 				.setValue("modified name");
-		assertEquals(
+		assertEquals("first circuit",
 				form.getSelectByName("circuit.id").getSelectedOptions()
-						.getFirst().getText(),
-				"first circuit");
+						.getFirst().getText());
 		form.getSelectByName("circuit.id").getOptionByText("second circuit")
 				.setSelected(true);
 		form.getButtonByName("btn_edit_circuit").click();
@@ -317,13 +315,12 @@ class RaceWebControllerHtmlUnitTest {
 				.contains("No Pilots");
 		form.getInputByName("name")
 				.setValue("A name");
-		assertEquals(
+		assertEquals("Select",
 				form.getSelectByName("circuit.id").getSelectedOptions()
-						.getFirst().getText(),
-				"Select");
+						.getFirst().getText());
 		form.getSelectByName("circuit.id").getOptionByText("second circuit")
 				.setSelected(true);
-		
+
 		form.getButtonByName("btn_edit_name").click();
 
 		ArgumentCaptor<Race> raceCaptor = ArgumentCaptor.forClass(Race.class);
