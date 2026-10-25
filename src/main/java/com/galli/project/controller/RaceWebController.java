@@ -24,6 +24,8 @@ public class RaceWebController {
 	private static final String MESSAGE = "message";
 	private RaceService service;
 
+	private static final String REDIRECT_RACES_VIEW = "redirect:/races/view/";
+
 	public RaceWebController(RaceService service) {
 		this.service = service;
 	}
@@ -76,7 +78,7 @@ public class RaceWebController {
 			id = service.updateRaceById(id, race).getId();
 		}
 
-		return "redirect:/races/view/" + id;
+		return REDIRECT_RACES_VIEW + id;
 	}
 
 	@PostMapping("/races/delete/{id}")
@@ -89,13 +91,13 @@ public class RaceWebController {
 	public String addPilotToRace(@PathVariable Long raceId,
 			@RequestParam Long pilotId) {
 		service.addPilotToRaceById(raceId, pilotId);
-		return "redirect:/races/view/" + raceId;
+		return REDIRECT_RACES_VIEW + raceId;
 	}
 
 	@PostMapping("/races/{raceId}/pilots/delete/{pilotId}")
 	public String deletePilotFromRace(@PathVariable Long raceId,
 			@PathVariable Long pilotId) {
 		service.deletePilotFromRaceById(raceId, pilotId);
-		return "redirect:/races/view/" + raceId;
+		return REDIRECT_RACES_VIEW + raceId;
 	}
 }
