@@ -2,6 +2,7 @@ package com.galli.project;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -190,8 +191,8 @@ class RaceCompleteIT {
 
 		mvc.perform(post("/races/" + id + "/pilots/delete/" + pilot2.getId()))
 				.andExpect(view().name("redirect:/races/view/" + id));
-		assertTrue(entityManager.find(Race.class, id).getPilots()
-				.equals(new HashSet<Pilot>(asList(pilot1))));
+		assertEquals(new HashSet<Pilot>(asList(pilot1)),
+				entityManager.find(Race.class, id).getPilots());
 	}
 
 }

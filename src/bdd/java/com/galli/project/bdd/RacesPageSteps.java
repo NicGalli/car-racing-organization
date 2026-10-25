@@ -142,10 +142,9 @@ public class RacesPageSteps extends CucumberSpringConfig {
 
 		final HtmlForm form = viewRacePage.getFormByName("race_form");
 		form.getInputByValue("first race");
-		assertEquals(
+		assertEquals("first circuit",
 				form.getSelectByName("circuit.id").getSelectedOptions()
-						.getFirst().getText(),
-				"first circuit");
+						.getFirst().getText());
 	}
 
 	@Given("The user clicks the new race button")
@@ -182,10 +181,9 @@ public class RacesPageSteps extends CucumberSpringConfig {
 	public void the_race_contains_the_information_of_the_new_race() {
 		final HtmlForm form = viewRacePage.getFormByName("race_form");
 		form.getInputByValue("new race");
-		assertEquals(
+		assertEquals("second circuit",
 				form.getSelectByName("circuit.id").getSelectedOptions()
-						.getFirst().getText(),
-				"second circuit");
+						.getFirst().getText());
 	}
 
 	@Then("The list contains a few races and the new race")
@@ -273,10 +271,9 @@ public class RacesPageSteps extends CucumberSpringConfig {
 		final HtmlForm form = viewRacePage.getFormByName("race_form");
 		form.getInputByValue("first race")
 				.setValue("modified race");
-		assertEquals(
+		assertEquals("first circuit",
 				form.getSelectByName("circuit.id").getSelectedOptions()
-						.getFirst().getText(),
-				"first circuit");
+						.getFirst().getText());
 		form.getSelectByName("circuit.id").getOptionByText("second circuit")
 				.setSelected(true);
 	}
@@ -286,10 +283,9 @@ public class RacesPageSteps extends CucumberSpringConfig {
 
 		final HtmlForm form = viewRacePage.getFormByName("race_form");
 		form.getInputByValue("modified race");
-		assertEquals(
+		assertEquals("second circuit",
 				form.getSelectByName("circuit.id").getSelectedOptions()
-						.getFirst().getText(),
-				"second circuit");
+						.getFirst().getText());
 	}
 
 	@Then("The list contains a few races and the updated race")

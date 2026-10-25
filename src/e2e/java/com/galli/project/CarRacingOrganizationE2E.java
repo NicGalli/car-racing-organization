@@ -35,7 +35,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  * docker compose down
  * 
  */
-class CarRacingOrganizationE2E {
+class CarRacingOrganizationE2E { // NOSONAR java:S3577
 
 	private static int port = Integer
 			.parseInt(System.getProperty("server.port", "8080"));
@@ -89,7 +89,8 @@ class CarRacingOrganizationE2E {
 		driver.findElement(By.name("btn_submit")).click();
 		// verify circuits are added
 		assertThat(driver.findElement(By.id("circuits_table")).getText())
-				.contains("e2e first circuit", "1000", "e2e second circuit", "2000");
+				.contains("e2e first circuit", "1000", "e2e second circuit",
+						"2000");
 
 		// create new race
 		driver.get(baseUrl + "/homepage");
@@ -200,7 +201,8 @@ class CarRacingOrganizationE2E {
 		driver.findElement(By.name("name")).sendKeys("e2e modified pilot");
 		driver.findElement(By.name("btn_submit")).click();
 		assertThat(driver.findElement(By.id("pilots_table")).getText())
-				.doesNotContain("e2e third pilot").contains("e2e modified pilot");
+				.doesNotContain("e2e third pilot")
+				.contains("e2e modified pilot");
 
 		// edit circuit
 		driver.get(baseUrl + "/circuits");
