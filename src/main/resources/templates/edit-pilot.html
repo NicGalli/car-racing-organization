@@ -15,7 +15,8 @@
 		<form name="pilot_form" action="#" th:action="@{/pilots/save}" th:object="${pilot}" method="post">
 			<input type="hidden" th:field="*{id}" />
 			<p>
-				Name: <input type="text" th:field="*{name}" />
+				<label for="name">Name:</label>
+				<input type="text" id="name" th:field="*{name}" />
 			</p>
 			<button type="submit" name="btn_submit">Save</button>
 			<button type="submit" name="btn_delete" th:if="${pilot.id != null}" th:formaction="@{'/pilots/delete/' +

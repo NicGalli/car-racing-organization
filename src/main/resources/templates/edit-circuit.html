@@ -15,10 +15,12 @@
 		<form name="circuit_form" action="#" th:action="@{/circuits/save}" th:object="${circuit}" method="post">
 			<input type="hidden" th:field="*{id}" />
 			<p>
-				Name: <input type="text" th:field="*{name}" />
+				<label for="name">Name:</label>
+				<input type="text" id="name" th:field="*{name}" />
 			</p>
 			<p>
-				Length (m): <input type="text" th:field="*{length}" />
+				<label for="length">Length (m):</label>
+				<input type="text" id="length" th:field="*{length}" />
 			</p>
 			<button type="submit" name="btn_submit">Save</button>
 			<button type="submit" name="btn_delete" th:if="${circuit.id != null}" th:formaction="@{'/circuits/delete/' +

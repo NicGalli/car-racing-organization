@@ -13,10 +13,13 @@
 	<div th:if="${message.empty}">
 		<form name="race_form" action="#" th:action="@{/races/save}" th:object="${race}" method="post">
 			<input type="hidden" th:field="*{id}" />
-			<table>
+			<table role="presentation">
 				<tr>
 					<td>
-						<p>Race: <input type="text" th:field="*{name}" /></p>
+						<p>
+							<label for="name">Race:</label>
+							<input type="text" id="name" th:field="*{name}" />
+						</p>
 					</td>
 					<td>
 						<button type="submit" name="btn_edit_name">Edit</button>
@@ -65,6 +68,7 @@
 
 		<form name="add_pilot_form" th:if="${race.id != null}" th:action="@{'/races/' + ${race.id} + '/pilots/add'}"
 			method="post">
+			<label for="pilot">Add Pilot:</label>
 			<select id="pilot" name="pilotId" required>
 				<option value="" disabled selected>Pilots</option>
 				<option th:each="p : ${allOtherPilots}" th:value="${p.id}" th:text="${p.name}">

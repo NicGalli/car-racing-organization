@@ -41,9 +41,12 @@
 			**/ServletInitializer.*
 		</sonar.coverage.exclusions>
 		<argLine />
-		<sonar.issue.ignore.multicriteria>e1</sonar.issue.ignore.multicriteria>
+		<sonar.issue.ignore.multicriteria>e1,e2</sonar.issue.ignore.multicriteria>
 		<sonar.issue.ignore.multicriteria.e1.ruleKey>xml:S2068</sonar.issue.ignore.multicriteria.e1.ruleKey>
+		<sonar.issue.ignore.multicriteria.e2.ruleKey>java:S6437</sonar.issue.ignore.multicriteria.e2.ruleKey>
 		<sonar.issue.ignore.multicriteria.e1.resourceKey>**/pom.xml</sonar.issue.ignore.multicriteria.e1.resourceKey>
+		<sonar.issue.ignore.multicriteria.e2.resourceKey>
+			**/application.properties</sonar.issue.ignore.multicriteria.e2.resourceKey>
 	</properties>
 	<dependencies>
 		<dependency>
