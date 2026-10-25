@@ -15,9 +15,9 @@ import com.galli.project.repository.RaceRepository;
 @Service
 public class RaceServiceImpl implements RaceService {
 
-	private RaceRepository raceRepository;
-	private CircuitRepository circuitRepository;
-	private PilotRepository pilotRepository;
+	private final RaceRepository raceRepository;
+	private final CircuitRepository circuitRepository;
+	private final PilotRepository pilotRepository;
 
 	public RaceServiceImpl(RaceRepository raceRepository,
 			CircuitRepository circuitRepository,

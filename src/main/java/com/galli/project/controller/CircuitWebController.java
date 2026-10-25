@@ -16,7 +16,7 @@ import com.galli.project.service.CircuitService;
 public class CircuitWebController {
 
 	private static final String MESSAGE = "message";
-	private CircuitService service;
+	private final CircuitService service;
 
 	public CircuitWebController(CircuitService service) {
 		this.service = service;

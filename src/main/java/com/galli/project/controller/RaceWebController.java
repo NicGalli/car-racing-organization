@@ -22,7 +22,7 @@ import com.galli.project.service.RaceService;
 public class RaceWebController {
 
 	private static final String MESSAGE = "message";
-	private RaceService service;
+	private final RaceService service;
 
 	private static final String REDIRECT_RACES_VIEW = "redirect:/races/view/";
 

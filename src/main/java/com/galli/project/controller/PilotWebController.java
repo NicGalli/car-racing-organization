@@ -16,7 +16,7 @@ import com.galli.project.service.PilotService;
 public class PilotWebController {
 
 	private static final String MESSAGE = "message";
-	private PilotService service;
+	private final PilotService service;
 
 	public PilotWebController(PilotService service) {
 		this.service = service;

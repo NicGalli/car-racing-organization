@@ -4,13 +4,13 @@ import java.util.List;
 
 public class RaceDTO {
 
-	private Long id;
+	private final Long id;
 
-	private String name;
+	private final String name;
 
-	private Circuit circuit;
+	private final Circuit circuit;
 
-	private List<Pilot> pilots;
+	private final List<Pilot> pilots;
 
 	public RaceDTO(Long id, String name, Circuit circuit,
 			List<Pilot> pilots) {

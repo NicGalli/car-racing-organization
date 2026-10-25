@@ -1,10 +1,10 @@
 package com.galli.project.model;
 
 public class CircuitDTO {
-	
-	private Long id;
-	private String name;
-	private Long length;
+
+	private final Long id;
+	private final String name;
+	private final Long length;
 
 	/**
 	 * @param id

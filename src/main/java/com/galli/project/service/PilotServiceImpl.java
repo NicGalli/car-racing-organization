@@ -10,7 +10,7 @@ import com.galli.project.repository.PilotRepository;
 @Service
 public class PilotServiceImpl implements PilotService {
 
-	private PilotRepository repository;
+	private final PilotRepository repository;
 
 	public PilotServiceImpl(PilotRepository repository) {
 		this.repository = repository;

@@ -2,8 +2,8 @@ package com.galli.project.model;
 
 public class PilotDTO {
 
-	private Long id;
-	private String name;
+	private final Long id;
+	private final String name;
 
 	public PilotDTO(Long id, String name) {
 		this.id = id;

@@ -10,7 +10,7 @@ import com.galli.project.repository.CircuitRepository;
 @Service
 public class CircuitServiceImpl implements CircuitService {
 
-	private CircuitRepository repository;
+	private final CircuitRepository repository;
 
 	public CircuitServiceImpl(CircuitRepository repository) {
 		this.repository = repository;
