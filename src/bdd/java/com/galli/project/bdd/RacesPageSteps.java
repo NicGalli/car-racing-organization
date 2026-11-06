@@ -21,7 +21,12 @@ import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
 import com.galli.project.model.Circuit;
 import com.galli.project.model.Pilot;
 import com.galli.project.model.Race;
+import com.galli.project.repository.CircuitRepository;
+import com.galli.project.repository.PilotRepository;
+import com.galli.project.repository.RaceRepository;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -32,13 +37,36 @@ public class RacesPageSteps extends CucumberSpringConfig {
 	private WebClient webClient;
 	@Autowired
 	private TestEntityManager testEntityManager;
+	@Autowired
+	private PilotRepository pilotRepository;
+	@Autowired
+	private CircuitRepository circuitRepository;
+	@Autowired
+	private RaceRepository raceRepository;
 
 	private HtmlPage viewRacePage;
 	private HtmlPage racesPage;
 
 	private List<Long> pilotIds;
-	private List<Long> circuitsIds;
+	private List<Long> circuitIds;
 	private List<Long> raceIds;
+
+	@Before
+	@After
+	public void clean() {
+		pilotIds = null;
+		circuitIds = null;
+		raceIds = null;
+		viewRacePage = null;
+		racesPage = null;
+
+		pilotRepository.deleteAll();
+		pilotRepository.flush();
+		circuitRepository.deleteAll();
+		circuitRepository.flush();
+		raceRepository.deleteAll();
+		raceRepository.flush();
+	}
 
 	@Given("The database contains a few races")
 	public void the_database_contains_a_few_races() {
@@ -50,7 +78,7 @@ public class RacesPageSteps extends CucumberSpringConfig {
 				(long) testEntityManager
 						.persistAndGetId(new Pilot("third pilot"))));
 
-		circuitsIds = new ArrayList<>(asList(
+		circuitIds = new ArrayList<>(asList(
 				(long) testEntityManager
 						.persistAndGetId(new Circuit("first circuit", 1000L)),
 				(long) testEntityManager
@@ -62,7 +90,7 @@ public class RacesPageSteps extends CucumberSpringConfig {
 				(long) testEntityManager
 						.persistAndGetId(
 								new Race("first race",
-										new Circuit(circuitsIds.get(0)),
+										new Circuit(circuitIds.get(0)),
 										new HashSet<>(asList(
 												new Pilot(pilotIds.get(0)),
 												new Pilot(
@@ -70,7 +98,7 @@ public class RacesPageSteps extends CucumberSpringConfig {
 				(long) testEntityManager
 						.persistAndGetId(
 								new Race("second race",
-										new Circuit(circuitsIds.get(1)),
+										new Circuit(circuitIds.get(1)),
 										new HashSet<>(asList(
 												new Pilot(pilotIds.get(1)),
 												new Pilot(
@@ -78,7 +106,7 @@ public class RacesPageSteps extends CucumberSpringConfig {
 				(long) testEntityManager
 						.persistAndGetId(
 								new Race("third race",
-										new Circuit(circuitsIds.get(2)),
+										new Circuit(circuitIds.get(2)),
 										new HashSet<>(asList(
 												new Pilot(
 														pilotIds.get(1))))))));
@@ -129,17 +157,15 @@ public class RacesPageSteps extends CucumberSpringConfig {
 
 	@Then("The Race contains all the information")
 	public void the_race_contains_all_the_information() {
-
 		HtmlTable table = viewRacePage.getHtmlElementById("pilots_table");
-		String textBlock = """
-				Pilots
-				ID	Name
-				%d	first pilot	Remove
-				%d	second pilot	Remove""".formatted(
-				pilotIds.get(0),
-				pilotIds.get(1));
-		assertThat(table.asNormalizedText()).isEqualTo(textBlock);
-
+		
+		assertThat(table.asNormalizedText().lines())
+				.containsExactlyInAnyOrderElementsOf(asList("Pilots",
+						"ID	Name",
+						"%d	first pilot	Remove".formatted(pilotIds.get(0)),
+						"%d	second pilot	Remove"
+								.formatted(pilotIds.get(1))));
+		
 		final HtmlForm form = viewRacePage.getFormByName("race_form");
 		form.getInputByValue("first race");
 		assertEquals("first circuit",

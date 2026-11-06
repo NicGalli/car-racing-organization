@@ -22,7 +22,6 @@ import org.springframework.boot.jpa.test.autoconfigure.AutoConfigureTestEntityMa
 import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +43,6 @@ import com.galli.project.model.Race;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-@DirtiesContext
 @AutoConfigureTestEntityManager
 class RaceCompleteIT {
 

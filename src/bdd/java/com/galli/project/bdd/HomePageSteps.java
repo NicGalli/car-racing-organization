@@ -16,7 +16,12 @@ import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
 import com.galli.project.model.Circuit;
 import com.galli.project.model.Pilot;
 import com.galli.project.model.Race;
+import com.galli.project.repository.CircuitRepository;
+import com.galli.project.repository.PilotRepository;
+import com.galli.project.repository.RaceRepository;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -26,6 +31,12 @@ public class HomePageSteps extends CucumberSpringConfig {
 	private WebClient webClient;
 	@Autowired
 	private TestEntityManager testEntityManager;
+	@Autowired
+	private PilotRepository pilotRepository;
+	@Autowired
+	private CircuitRepository circuitRepository;
+	@Autowired
+	private RaceRepository raceRepository;
 
 	private HtmlPage races;
 	private HtmlPage pilots;
@@ -35,6 +46,26 @@ public class HomePageSteps extends CucumberSpringConfig {
 	private List<Long> pilotIds;
 	private List<Long> circuitIds;
 	private List<Long> raceIds;
+
+	@Before
+	@After
+	public void clean() {
+		pilotIds = null;
+		circuitIds = null;
+		raceIds = null;
+		
+		races = null;
+		pilots = null;
+		circuits = null;
+		homepage = null;
+
+		pilotRepository.deleteAll();
+		pilotRepository.flush();
+		circuitRepository.deleteAll();
+		circuitRepository.flush();
+		raceRepository.deleteAll();
+		raceRepository.flush();
+	}
 
 	@Given("The database contains a few races, pilots, and circuits")
 	public void the_database_contains_a_few_races_pilots_and_circuits() {

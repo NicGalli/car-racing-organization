@@ -14,7 +14,6 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.galli.project.model.Circuit;
@@ -37,7 +36,6 @@ import com.galli.project.service.RaceServiceImpl;
 @ExtendWith(SpringExtension.class)
 @Import(RaceServiceImpl.class)
 @DataJpaTest
-@DirtiesContext
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class RaceServiceRepositoryIT {
 
