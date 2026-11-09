@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.galli.project.model.Circuit;
@@ -18,6 +19,7 @@ import com.galli.project.model.Race;
 import com.galli.project.model.RaceDTO;
 import com.galli.project.service.RaceService;
 
+@RequestMapping("/races")
 @Controller
 public class RaceWebController {
 
@@ -30,7 +32,7 @@ public class RaceWebController {
 		this.service = service;
 	}
 
-	@GetMapping("/races")
+	@GetMapping
 	public String getRacesPage(Model model) {
 		List<Race> races = service.getAllRaces();
 		model.addAttribute("races", races);
@@ -38,7 +40,7 @@ public class RaceWebController {
 		return "races-list";
 	}
 
-	@GetMapping("/races/view/{id}")
+	@GetMapping("/view/{id}")
 	public String viewRacePage(Model model, @PathVariable Long id) {
 		Race race = service.getRaceById(id);
 		List<Circuit> allCircuits = service.getAllCircuits();
@@ -52,7 +54,7 @@ public class RaceWebController {
 		return "view-race";
 	}
 
-	@GetMapping("/races/new")
+	@GetMapping("/new")
 	public String addRacePage(Model model) {
 		model.addAttribute("race", new Race(null, null, emptySet()));
 		model.addAttribute("allCircuits", service.getAllCircuits());
@@ -60,7 +62,7 @@ public class RaceWebController {
 		return "view-race";
 	}
 
-	@PostMapping("/races/save")
+	@PostMapping("/save")
 	public String saveRace(RaceDTO raceDTO) {
 		Race race = new Race();
 		race.setId(raceDTO.getId());
@@ -81,20 +83,20 @@ public class RaceWebController {
 		return REDIRECT_RACES_VIEW + id;
 	}
 
-	@PostMapping("/races/delete/{id}")
+	@PostMapping("/delete/{id}")
 	public String deleteRace(@PathVariable Long id) {
 		service.deleteRaceById(id);
 		return "redirect:/races";
 	}
 
-	@PostMapping("/races/{raceId}/pilots/add")
+	@PostMapping("/{raceId}/pilots/add")
 	public String addPilotToRace(@PathVariable Long raceId,
 			@RequestParam Long pilotId) {
 		service.addPilotToRaceById(raceId, pilotId);
 		return REDIRECT_RACES_VIEW + raceId;
 	}
 
-	@PostMapping("/races/{raceId}/pilots/delete/{pilotId}")
+	@PostMapping("/{raceId}/pilots/delete/{pilotId}")
 	public String deletePilotFromRace(@PathVariable Long raceId,
 			@PathVariable Long pilotId) {
 		service.deletePilotFromRaceById(raceId, pilotId);

@@ -7,11 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.galli.project.model.Circuit;
 import com.galli.project.model.CircuitDTO;
 import com.galli.project.service.CircuitService;
 
+@RequestMapping("/circuits")
 @Controller
 public class CircuitWebController {
 
@@ -22,7 +24,7 @@ public class CircuitWebController {
 		this.service = service;
 	}
 
-	@GetMapping("/circuits")
+	@GetMapping
 	public String getCircuitsPage(Model model) {
 		List<Circuit> circuits = service.getAllCircuits();
 		model.addAttribute("circuits", circuits);
@@ -30,7 +32,7 @@ public class CircuitWebController {
 		return "circuits-list";
 	}
 
-	@GetMapping("/circuits/edit/{id}")
+	@GetMapping("/edit/{id}")
 	public String editCircuitPage(Model model, @PathVariable Long id) {
 		Circuit circuit = service.getCircuitById(id);
 		model.addAttribute("circuit", circuit);
@@ -39,14 +41,14 @@ public class CircuitWebController {
 		return "edit-circuit";
 	}
 
-	@GetMapping("/circuits/new")
+	@GetMapping("/new")
 	public String addCircuitPage(Model model) {
 		model.addAttribute("circuit", new Circuit());
 		model.addAttribute(MESSAGE, "");
 		return "edit-circuit";
 	}
 
-	@PostMapping("/circuits/save")
+	@PostMapping("/save")
 	public String saveCircuit(CircuitDTO circuitDTO) {
 
 		Circuit circuit = new Circuit();
@@ -64,7 +66,7 @@ public class CircuitWebController {
 		return "redirect:/circuits";
 	}
 
-	@PostMapping("/circuits/delete/{id}")
+	@PostMapping("/delete/{id}")
 	public String deleteCircuit(@PathVariable Long id) {
 		service.deleteCircuitById(id);
 		return "redirect:/circuits";

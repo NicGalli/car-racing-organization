@@ -7,11 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.galli.project.model.Pilot;
 import com.galli.project.model.PilotDTO;
 import com.galli.project.service.PilotService;
 
+@RequestMapping("/pilots")
 @Controller
 public class PilotWebController {
 
@@ -22,7 +24,7 @@ public class PilotWebController {
 		this.service = service;
 	}
 
-	@GetMapping("/pilots")
+	@GetMapping
 	public String getPilotsPage(Model model) {
 		List<Pilot> pilots = service.getAllPilots();
 		model.addAttribute("pilots", pilots);
@@ -30,7 +32,7 @@ public class PilotWebController {
 		return "pilots-list";
 	}
 
-	@GetMapping("/pilots/edit/{id}")
+	@GetMapping("/edit/{id}")
 	public String editPilotPage(Model model, @PathVariable Long id) {
 		Pilot pilot = service.getPilotById(id);
 		model.addAttribute("pilot", pilot);
@@ -39,14 +41,14 @@ public class PilotWebController {
 		return "edit-pilot";
 	}
 
-	@GetMapping("/pilots/new")
+	@GetMapping("/new")
 	public String addPilotPage(Model model) {
 		model.addAttribute("pilot", new Pilot());
 		model.addAttribute(MESSAGE, "");
 		return "edit-pilot";
 	}
 
-	@PostMapping("/pilots/save")
+	@PostMapping("/save")
 	public String savePilot(PilotDTO pilotDTO) {
 
 		Pilot pilot = new Pilot();
@@ -63,7 +65,7 @@ public class PilotWebController {
 		return "redirect:/pilots";
 	}
 
-	@PostMapping("/pilots/delete/{id}")
+	@PostMapping("/delete/{id}")
 	public String deletePilot(@PathVariable Long id) {
 		service.deletePilotById(id);
 		return "redirect:/pilots";
